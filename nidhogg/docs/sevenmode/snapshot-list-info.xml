@@ -1,0 +1,22 @@
+
+<snapshot-list-info>
+    <target-name>proj998</target-name>
+    <target-type>volume</target-type>
+</snapshot-list-info>
+
+
+
+<snapshots>
+    <snapshot-info>
+        <name>testsnap</name>
+        <access-time>1407428909</access-time>
+        <total>80</total>
+        <cumulative-total>80</cumulative-total>
+        <dependency/>
+        <busy>false</busy>
+        <cumulative-percentage-of-used-blocks>2</cumulative-percentage-of-used-blocks>
+        <percentage-of-used-blocks>2</percentage-of-used-blocks>
+        <cumulative-percentage-of-total-blocks>0</cumulative-percentage-of-total-blocks>
+        <percentage-of-total-blocks>0</percentage-of-total-blocks>
+        <snapshot-instance-uuid>dd96948d-1e4f-11e4-bbd3-123478563412</snapshot-instance-uuid>
+        <snapshot-version-uuid>dd96948d-1e4f-11e4-bbd3-123478563412</snapshot-version-uuid>

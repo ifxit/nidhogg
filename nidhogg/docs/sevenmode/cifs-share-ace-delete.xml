@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.19">
+  <cifs-share-ace-delete>
+    <share-name>hallo</share-name>
+    <user-name>userdir</user-name>
+  </cifs-share-ace-delete>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-ace-delete [Execution Time: 1030 ms] -->
+    <results status='passed'/>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-ace-delete [Execution Time: 1000 ms] -->
+    <results errno='22' reason='No share is matching the name dasdaso' status='failed'/>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-ace-delete [Execution Time: 1060 ms] -->
+    <results errno='22' reason='Unknown user/group : Everyonee' status='failed'/>
+</netapp>

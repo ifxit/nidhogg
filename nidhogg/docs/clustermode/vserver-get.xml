@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.21">
+  <vserver-get>
+  </vserver-get>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of vserver-get [Execution Time: 540 ms] -->
+    <results status='passed'>
+        <attributes>
+            <vserver-info>
+                <allowed-protocols>
+                    <protocol>nfs</protocol>
+                    <protocol>cifs</protocol>
+                </allowed-protocols>
+                <antivirus-on-access-policy>default</antivirus-on-access-policy>
+                <comment/>
+                <disallowed-protocols>
+                    <protocol>fcp</protocol>
+                    <protocol>iscsi</protocol>
+                    <protocol>ndmp</protocol>
+                </disallowed-protocols>
+                <is-repository-vserver>false</is-repository-vserver>
+                <language>en_us.utf_8</language>
+                <ldap-domain>RD-Unix</ldap-domain>
+                <max-volumes>unlimited</max-volumes>
+                <name-mapping-switch>
+                    <nmswitch>file</nmswitch>
+                </name-mapping-switch>
+                <name-server-switch>
+                    <nsswitch>file</nsswitch>
+                    <nsswitch>ldap</nsswitch>
+                </name-server-switch>
+                <quota-policy>default</quota-policy>
+                <root-volume>sdv001_vol0</root-volume>
+                <root-volume-aggregate>aggr1_01_BSAS2000</root-volume-aggregate>
+                <root-volume-security-style>unix</root-volume-security-style>
+                <snapshot-policy>default</snapshot-policy>
+                <state>running</state>
+                <uuid>3b8c1ff8-ad9f-11e2-9f6a-123478563412</uuid>
+                <vserver-name>filer101sm</vserver-name>
+                <vserver-type>data</vserver-type>
+            </vserver-info>
+        </attributes>
+    </results>
+</netapp>

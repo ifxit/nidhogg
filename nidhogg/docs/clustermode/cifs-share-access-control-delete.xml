@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.21">
+  <cifs-share-access-control-delete>
+    <share>userdir</share>
+    <user-or-group>userdir</user-or-group>
+  </cifs-share-access-control-delete>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-access-control-delete [Execution Time: 200 ms] -->
+    <results status='passed'/>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-access-control-delete [Execution Time: 160 ms] -->
+    <results errno='15661' status='failed' reason='entry doesn"t exist'/>
+</netapp>
+

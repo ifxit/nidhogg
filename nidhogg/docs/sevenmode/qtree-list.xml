@@ -1,0 +1,94 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.19">
+  <qtree-list>
+    <volume>test001</volume>
+  </qtree-list>
+</netapp>
+
+
+<results status='passed'>
+    <qtrees>
+        <qtree-info>
+            <volume>test001</volume>
+            <qtree/>
+            <id>0</id>
+            <oplocks>enabled</oplocks>
+            <security-style>ntfs</security-style>
+            <status>normal</status>
+        </qtree-info>
+    </qtrees>
+</results>
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of qtree-list [Execution Time: 1000 ms] -->
+    <results status='passed'>
+        <qtrees>
+            <qtree-info>
+                <volume>test001</volume>
+                <qtree/>
+                <id>0</id>
+                <oplocks>enabled</oplocks>
+                <security-style>ntfs</security-style>
+                <status>normal</status>
+            </qtree-info>
+            <qtree-info>
+                <volume>test001</volume>
+                <qtree>vmbackup</qtree>
+                <id>1</id>
+                <oplocks>enabled</oplocks>
+                <security-style>ntfs</security-style>
+                <status>normal</status>
+            </qtree-info>
+            <qtree-info>
+                <volume>test001</volume>
+                <qtree>core</qtree>
+                <id>2</id>
+                <oplocks>enabled</oplocks>
+                <security-style>unix</security-style>
+                <status>normal</status>
+            </qtree-info>
+            <qtree-info>
+                <volume>test001</volume>
+                <qtree>smbtest1</qtree>
+                <id>3</id>
+                <oplocks>enabled</oplocks>
+                <security-style>ntfs</security-style>
+                <status>normal</status>
+            </qtree-info>
+            <qtree-info>
+                <volume>test001</volume>
+                <qtree>smbtest2</qtree>
+                <id>4</id>
+                <oplocks>enabled</oplocks>
+                <security-style>ntfs</security-style>
+                <status>normal</status>
+            </qtree-info>
+            <qtree-info>
+                <volume>test001</volume>
+                <qtree>quotatest</qtree>
+                <id>5</id>
+                <oplocks>enabled</oplocks>
+                <security-style>ntfs</security-style>
+                <status>normal</status>
+            </qtree-info>
+            <qtree-info>
+                <volume>test001</volume>
+                <qtree>hallo</qtree>
+                <id>6</id>
+                <oplocks>enabled</oplocks>
+                <security-style>ntfs</security-style>
+                <status>normal</status>
+            </qtree-info>
+        </qtrees>
+    </results>
+</netapp>
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of qtree-list [Execution Time: 1000 ms] -->
+    <results errno='13040' reason='Volume  not found.' status='failed'/>
+</netapp>

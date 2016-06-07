@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.21">
+  <quota-resize>
+    <volume>test002</volume>
+  </quota-resize>
+</netapp>
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-resize [Execution Time: 200 ms] -->
+    <results status='passed'>
+        <result-jobid>5991</result-jobid>
+        <result-status>in_progress</result-status>
+    </results>
+</netapp>

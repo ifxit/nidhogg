@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='utf-8'?>
+<netapp version='1.15' xmlns='http://www.netapp.com/filer/admin'>
+    <cifs-share-acl-list-iter-start>
+        <share-name>userdir</share-name>
+    </cifs-share-acl-list-iter-start>
+</netapp>
+
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+    <results status="passed">
+        <tag>2856205940470780</tag>
+        <records>1</records>
+    </results>
+</netapp>
+
+
+
+<netapp version='1.15' xmlns='http://www.netapp.com/filer/admin'>
+    <cifs-share-acl-list-iter-next>
+        <tag>2856205940470780</tag>
+    </cifs-share-acl-list-iter-next>
+</netapp>
+
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+    <results status="passed">
+        <records>1</records>
+        <cifs-share-acls>
+            <cifs-share-acl-info>
+                <share-name>userdir</share-name>
+                <user-acl-info>
+                    <access-rights-info>
+                        <user-name>everyone</user-name>
+                        <access-rights>Full Control</access-rights>
+                    </access-rights-info>
+                    <access-rights-info>
+                        <user-name>thaller</user-name>
+                        <access-rights>r-x</access-rights>
+                    </access-rights-info>
+                    <access-rights-info>
+                        <user-name>thal</user-name>
+                        <access-rights>r-x</access-rights>
+                    </access-rights-info>
+                </user-acl-info>
+            </cifs-share-acl-info>
+        </cifs-share-acls>
+    </results>
+</netapp>
+
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-acl-list-iter-start [Execution Time: 1024 ms] -->
+    <results errno='22' reason='No share is matching that name. ' status='failed'>
+        <tag>2859394169691240</tag>
+        <records>0</records>
+    </results>
+
+    <!-- Output of cifs-share-acl-list-iter-end [Execution Time: 1007 ms] -->
+    <results status='passed'/>
+</netapp>
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-acl-list-iter-start [Execution Time: 1070 ms] -->
+    <results status='passed'>
+        <tag>2860260384907580</tag>
+        <records>1</records>
+    </results>
+
+    <!-- Output of cifs-share-acl-list-iter-next [Execution Time: 1010 ms] -->
+    <results status='passed'>
+        <records>1</records>
+        <cifs-share-acls>
+            <cifs-share-acl-info>
+                <share-name>userdir</share-name>
+                <user-acl-info>
+                    <access-rights-info>
+                        <user-name>everyone</user-name>
+                        <access-rights>Full Control</access-rights>
+                    </access-rights-info>
+                    <access-rights-info>
+                        <user-name>thaller</user-name>
+                        <access-rights>r-x</access-rights>
+                    </access-rights-info>
+                    <access-rights-info>
+                        <user-name>thal</user-name>
+                        <access-rights>r-x</access-rights>
+                    </access-rights-info>
+                    <access-rights-info>
+                        <unix-group-name>luma</unix-group-name>
+                        <access-rights>r-x</access-rights>
+                    </access-rights-info>
+                </user-acl-info>
+            </cifs-share-acl-info>
+        </cifs-share-acls>
+    </results>
+
+    <!-- Output of cifs-share-acl-list-iter-end [Execution Time: 1010 ms] -->
+    <results status='passed'/>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-acl-list-iter-start [Execution Time: 1010 ms] -->
+    <results status='passed'>
+        <tag>2867296046361780</tag>
+        <records>1</records>
+    </results>
+
+    <!-- Output of cifs-share-acl-list-iter-next [Execution Time: 1010 ms] -->
+    <results status='passed'>
+        <records>1</records>
+        <cifs-share-acls>
+            <cifs-share-acl-info>
+                <share-name>userdir</share-name>
+                <user-acl-info/>
+            </cifs-share-acl-info>
+        </cifs-share-acls>
+    </results>
+
+    <!-- Output of cifs-share-acl-list-iter-end [Execution Time: 1010 ms] -->
+    <results status='passed'/>
+</netapp>
+

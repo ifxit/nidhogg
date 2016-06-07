@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.19">
+  <quota-get-entry>
+    <qtree></qtree>
+    <quota-target>/vol/test001/hallo</quota-target>
+    <quota-type>tree</quota-type>
+    <volume>test001</volume>
+  </quota-get-entry>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-get-entry [Execution Time: 1020 ms] -->
+    <results status='passed'>
+        <disk-limit>1236</disk-limit>
+        <file-limit>-</file-limit>
+        <threshold>-</threshold>
+        <soft-disk-limit>988</soft-disk-limit>
+        <soft-file-limit>-</soft-file-limit>
+    </results>
+</netapp>

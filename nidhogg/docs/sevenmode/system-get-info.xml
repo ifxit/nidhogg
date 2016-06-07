@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.19">
+  <system-get-info/>
+</netapp>
+
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of system-get-info [Execution Time: 1020 ms] -->
+    <results status='passed'>
+        <system-info>
+            <system-name>filer99</system-name>
+            <system-id>0142217799</system-id>
+            <system-model>FAS2040</system-model>
+            <system-machine-type>FAS2040</system-machine-type>
+            <vendor-id>NetApp</vendor-id>
+            <system-serial-number>200000249975</system-serial-number>
+            <system-revision>B0                             </system-revision>
+            <controller-address>B</controller-address>
+            <board-speed>1666</board-speed>
+            <board-type>110-00133</board-type>
+            <cpu-part-number>110-00133</cpu-part-number>
+            <cpu-revision>A4</cpu-revision>
+            <cpu-serial-number>8000071                        </cpu-serial-number>
+            <cpu-firmware-release>6.1</cpu-firmware-release>
+            <number-of-processors>2</number-of-processors>
+            <memory-size>4096</memory-size>
+            <cpu-processor-type>Intel(R) Xeon(R) CPU                  @ 1.66GHz     </cpu-processor-type>
+            <cpu-microcode-version>85</cpu-microcode-version>
+            <supports-raid-array>false</supports-raid-array>
+        </system-info>
+    </results>
+</netapp>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.19">
+  <quota-delete-entry>
+    <qtree></qtree>
+    <quota-target>/vol/ck_test_vol/userdir</quota-target>
+    <quota-type>tree</quota-type>
+    <volume>ck_test_vol</volume>
+  </quota-delete-entry>
+</netapp>
+
+
+<!-- seven mode -->
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-delete-entry [Execution Time: 1010 ms] -->
+    <results status='passed'/>
+</netapp>
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-delete-entry [Execution Time: 1020 ms] -->
+    <results errno='13053' reason='quota /vol/ck_test_vol/userdir of type tree could not be found' status='failed'/>
+</netapp>
+
+
+<!-- cluster mode -->
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-delete-entry [Execution Time: 200 ms] -->
+    <results status='passed'/>
+</netapp>
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-delete-entry [Execution Time: 180 ms] -->
+    <results errno='13053' status='failed' reason='entry doesn"t exist'/>
+</netapp>

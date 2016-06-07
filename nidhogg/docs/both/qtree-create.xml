@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.19">
+  <qtree-create>
+    <mode>007</mode>
+    <qtree>hallo</qtree>
+    <volume>test001</volume>
+  </qtree-create>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of qtree-create [Execution Time: 1010 ms] -->
+    <results status='passed'/>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of qtree-create [Execution Time: 1010 ms] -->
+    <results errno='13080' reason='qtree create: Can"t create qtree (qtree exists). ' status='failed'/>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of qtree-create [Execution Time: 1001 ms] -->
+    <results errno='13040' reason='Volume does not exist.' status='failed'/>
+</netapp>
+
+<!-- clustermode -->
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of qtree-create [Execution Time: 164 ms] -->
+    <results errno='13080' status='failed' reason='Failed to create qtree "userdir" in volume "test002" Vserver "filer101sm". Reason: Qtree (or directory) "userdir" already exists.'/>
+</netapp>

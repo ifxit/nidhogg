@@ -1,0 +1,17 @@
+<!-- "default" policy must be added -->
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.21">
+  <quota-set-entry>
+    <disk-limit>1048576</disk-limit>
+    <quota-target>/vol/test002/qtree</quota-target>
+    <quota-type>tree</quota-type>
+    <policy>default</policy>
+    <qtree></qtree>
+    <volume>test002</volume>
+  </quota-set-entry>
+</netapp>
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+    <results status='passed'/>
+</netapp>

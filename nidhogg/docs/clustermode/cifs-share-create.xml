@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.21">
+  <cifs-share-create>
+    <comment>asdf</comment>
+    <dir-umask>007</dir-umask>
+    <file-umask>007</file-umask>
+    <path>/test002/userdir</path>
+    <share-name>userdir</share-name>
+  </cifs-share-create>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-create [Execution Time: 190 ms] -->
+    <results status='passed'/>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-create [Execution Time: 380 ms] -->
+    <results errno='13203' status='failed' reason='Duplicate entry. Share userdir already exists'/>
+</netapp>

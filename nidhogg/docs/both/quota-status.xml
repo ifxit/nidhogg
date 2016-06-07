@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.19">
+  <quota-status>
+    <volume>test001</volume>
+  </quota-status>
+</netapp>
+
+
+<!-- in progress -->
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-status [Execution Time: 1010 ms] -->
+    <results status='passed'>
+        <status>resizing</status>
+        <substatus>done</substatus>
+        <reason>quota: test001: quotas not on; resize not done.
+</reason>
+        <quota-errors>quota: test001: quotas not on; resize not done.
+</quota-errors>
+    </results>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-status [Execution Time: 1010 ms] -->
+    <results status='passed'>
+        <status>off</status>
+        <substatus>none</substatus>
+        <reason>quota: test001: quotas not on; resize not done.
+</reason>
+        <quota-errors>quota: test001: quotas not on; resize not done.
+</quota-errors>
+    </results>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-status [Execution Time: 1000 ms] -->
+    <results status='passed'>
+        <status>off</status>
+        <substatus>none</substatus>
+    </results>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-status [Execution Time: 1010 ms] -->
+    <results status='passed'>
+        <status>on</status>
+        <substatus>none</substatus>
+        <reason>[quota: warning]: Total tree disk quota limit from /etc/quotas (120595 MB) exceeds size of volume ck_test_vol (102437 MB)
+</reason>
+        <quota-errors>quota: Invalid volume, vsds020, in target. (/etc/quotas line 29).
+quota: can&apos;t stat file /vol/vsds020/vsds020: No such file or directory (/etc/quotas line 29).
+[quota: warning]: Total tree disk quota limit from /etc/quotas (120595 MB) exceeds size of volume ck_test_vol (102437 MB)
+</quota-errors>
+    </results>
+</netapp>

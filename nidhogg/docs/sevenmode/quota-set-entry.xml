@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.19">
+  <quota-set-entry>
+    <disk-limit>1048576</disk-limit>
+    <quota-target>/vol/test002/qtree</quota-target>
+    <quota-type>tree</quota-type>
+    <qtree></qtree>
+    <volume>test002</volume>
+  </quota-set-entry>
+</netapp>
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-set-entry [Execution Time: 1014 ms] -->
+    <results status='passed'/>
+</netapp>

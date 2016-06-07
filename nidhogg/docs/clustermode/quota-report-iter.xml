@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.21">
+  <quota-report-iter>
+    <query>
+      <quota>
+        <volume>nidhogg_test</volume>
+      </quota>
+    </query>
+  </quota-report-iter>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-report-iter [Execution Time: 336 ms] -->
+    <results status='passed'>
+        <attributes-list>
+            <quota>
+                <disk-limit>1048576</disk-limit>
+                <disk-used>0</disk-used>
+                <file-limit>-</file-limit>
+                <files-used>0</files-used>
+                <quota-target>*</quota-target>
+                <quota-type>tree</quota-type>
+                <soft-disk-limit>819200</soft-disk-limit>
+                <soft-file-limit>-</soft-file-limit>
+                <threshold>-</threshold>
+                <tree/>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </quota>
+            <quota>
+                <disk-limit>3145728</disk-limit>
+                <disk-used>0</disk-used>
+                <file-limit>-</file-limit>
+                <files-used>1</files-used>
+                <quota-target>/vol/test002/quotatest</quota-target>
+                <quota-type>tree</quota-type>
+                <soft-disk-limit>2516584</soft-disk-limit>
+                <soft-file-limit>-</soft-file-limit>
+                <threshold>-</threshold>
+                <tree>quotatest</tree>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </quota>
+            <quota>
+                <disk-limit>1048576</disk-limit>
+                <disk-used>0</disk-used>
+                <file-limit>-</file-limit>
+                <files-used>1</files-used>
+                <quota-target>/vol/test002/quotatest2</quota-target>
+                <quota-type>tree</quota-type>
+                <soft-disk-limit>819200</soft-disk-limit>
+                <soft-file-limit>-</soft-file-limit>
+                <threshold>-</threshold>
+                <tree>quotatest2</tree>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </quota>
+            <quota>
+                <disk-limit>3145728</disk-limit>
+                <disk-used>0</disk-used>
+                <file-limit>-</file-limit>
+                <files-used>1</files-used>
+                <quota-target>/vol/test002/quotatest3</quota-target>
+                <quota-type>tree</quota-type>
+                <soft-disk-limit>2516584</soft-disk-limit>
+                <soft-file-limit>-</soft-file-limit>
+                <threshold>-</threshold>
+                <tree>quotatest3</tree>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </quota>
+            <quota>
+                <disk-limit>3000000</disk-limit>
+                <disk-used>147432</disk-used>
+                <file-limit>-</file-limit>
+                <files-used>6</files-used>
+                <quota-target>/vol/test002/userdir</quota-target>
+                <quota-type>tree</quota-type>
+                <soft-disk-limit>2400000</soft-disk-limit>
+                <soft-file-limit>-</soft-file-limit>
+                <threshold>-</threshold>
+                <tree>userdir</tree>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </quota>
+            <quota>
+                <disk-limit>1048576</disk-limit>
+                <disk-used>0</disk-used>
+                <file-limit>-</file-limit>
+                <files-used>1</files-used>
+                <quota-target>/vol/test002/hallo</quota-target>
+                <quota-type>tree</quota-type>
+                <soft-disk-limit>819200</soft-disk-limit>
+                <soft-file-limit>-</soft-file-limit>
+                <threshold>-</threshold>
+                <tree>hallo</tree>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </quota>
+        </attributes-list>
+        <num-records>6</num-records>
+    </results>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-report-iter [Execution Time: 129 ms] -->
+    <results status='passed'>
+        <num-records>0</num-records>
+    </results>
+</netapp>

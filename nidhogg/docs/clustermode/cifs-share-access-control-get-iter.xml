@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.21">
+  <cifs-share-access-control-get-iter>
+    <query>
+      <cifs-share-access-control>
+        <share>userdir</share>
+      </cifs-share-access-control>
+    </query>
+  </cifs-share-access-control-get-iter>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-access-control-get-iter [Execution Time: 170 ms] -->
+    <results status='passed'>
+        <attributes-list>
+            <cifs-share-access-control>
+                <permission>full_control</permission>
+                <share>userdir</share>
+                <user-or-group>Everyone</user-or-group>
+                <vserver>filer101sm</vserver>
+                <winsid>S-1-1-0</winsid>
+            </cifs-share-access-control>
+            <cifs-share-access-control>
+                <permission>full_control</permission>
+                <share>userdir</share>
+                <user-or-group>userdir</user-or-group>
+                <vserver>filer101sm</vserver>
+                <winsid>S-1-5-21-2052111302-842925246-682003330-591489</winsid>
+            </cifs-share-access-control>
+        </attributes-list>
+        <num-records>2</num-records>
+    </results>
+</netapp>
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-access-control-get-iter [Execution Time: 150 ms] -->
+    <results status='passed'>
+        <num-records>0</num-records>
+    </results>
+</netapp>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.19">
+  <cifs-share-ace-set>
+    <access-rights>Full control</access-rights>
+    <share-name>hallo</share-name>
+    <user-name>userdir</user-name>
+  </cifs-share-ace-set>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-ace-set [Execution Time: 1030 ms] -->
+    <results status='passed'/>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-ace-set [Execution Time: 1045 ms] -->
+    <results errno='22' reason='Unknown user/group : asdf' status='failed'/>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-ace-set [Execution Time: 1046 ms] -->
+    <results errno='22' reason='No share is matching the name : hallo2' status='failed'/>
+</netapp>
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.19">
+  <cifs-share-ace-set>
+    <access-rights>Full control</access-rights>
+    <is-unixgroup>True</is-unixgroup>
+    <share-name>hallo</share-name>
+    <unix-group-name>luma</unix-group-name>
+  </cifs-share-ace-set>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-ace-set [Execution Time: 1020 ms] -->
+    <results status='passed'/>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-ace-set [Execution Time: 1030 ms] -->
+    <results errno='22' reason='Unknown Unix group : lumaa' status='failed'/>
+</netapp>
+
+
+
+NT-Style rights
+- "Full Control"
+- "Read"
+- "Change"
+- "No Access"

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.19">
+  <volume-list-info>
+  </volume-list-info>
+</netapp>
+
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of volume-list-info [Execution Time: 1090 ms] -->
+    <results status='passed'>
+        <volumes>
+            <volume-info>
+                <name>sm_filer96_vol0</name>
+                <uuid>bc5fd24c-18dd-11e4-8ee6-123478563412</uuid>
+                <type>flex</type>
+                <block-type>64_bit</block-type>
+                <state>online</state>
+                <size-total>120259084288</size-total>
+                <size-used>9575477248</size-used>
+                <size-available>110683607040</size-available>
+                <percentage-used>8</percentage-used>
+                <snapshot-percent-reserved>20</snapshot-percent-reserved>
+                <snapshot-blocks-reserved>29360128</snapshot-blocks-reserved>
+                <reserve-required>229376</reserve-required>
+                <reserve>229376</reserve>
+                <reserve-used>0</reserve-used>
+                <reserve-used-actual>0</reserve-used-actual>
+                <files-total>4358138</files-total>
+                <files-used>14021</files-used>
+                <files-private-used>582</files-private-used>
+                <inodefile-public-capacity>31142</inodefile-public-capacity>
+                <inodefile-private-capacity>31142</inodefile-private-capacity>
+                <quota-init>0</quota-init>
+                <is-snaplock>false</is-snaplock>
+                <containing-aggregate>ATA750_00</containing-aggregate>
+                <compression-info>
+                    <is-compression-enabled>false</is-compression-enabled>
+                </compression-info>
+                <instance-uuid>9b7e0725-5262-11e1-be9e-123478563412</instance-uuid>
+                <space-reserve>volume</space-reserve>
+                <space-reserve-enabled>true</space-reserve-enabled>
+                <provenance-uuid>e15b2baa-1c0d-11e1-8edb-123478563412</provenance-uuid>
+                <raid-size>7</raid-size>
+                <raid-status>raid4,snapmirrored,read-only</raid-status>
+                <checksum-style>block</checksum-style>
+                <is-checksum-enabled>true</is-checksum-enabled>
+                <is-inconsistent>false</is-inconsistent>
+                <is-unrecoverable>false</is-unrecoverable>
+                <is-invalid>false</is-invalid>
+                <is-in-snapmirror-jumpahead>false</is-in-snapmirror-jumpahead>
+                <mirror-status>unmirrored</mirror-status>
+                <disk-count>5</disk-count>
+                <plex-count>1</plex-count>
+                <plexes>
+                    <plex-info>
+                        <name>/ATA750_00/plex0</name>
+                        <is-online>true</is-online>
+                        <is-resyncing>false</is-resyncing>
+                    </plex-info>
+                </plexes>
+                <volume-64bit-upgrade>
+                    <volume-64bit-upgrade-info/>
+                </volume-64bit-upgrade>
+                <vm-align>
+                    <vm-align-info>
+                        <vm-align-sector>0</vm-align-sector>
+                        <vm-align-suffix/>
+                    </vm-align-info>
+                </vm-align>
+            </volume-info>
+        </volumes>
+    </results>
+</netapp>

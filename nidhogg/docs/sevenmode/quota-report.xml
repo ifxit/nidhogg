@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.19">
+  <quota-report>
+    <path>/vol/ck_test_vol/userdir</path>
+  </quota-report>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-report [Execution Time: 1005 ms] -->
+    <results status='passed'>
+        <quotas>
+            <quota>
+                <quota-type>tree</quota-type>
+                <quota-target>/vol/ck_test_vol/userdir</quota-target>
+                <volume>ck_test_vol</volume>
+                <tree>userdir</tree>
+                <disk-used>0</disk-used>
+                <disk-limit>1236</disk-limit>
+                <soft-disk-limit>988</soft-disk-limit>
+                <threshold>-</threshold>
+                <files-used>1</files-used>
+                <file-limit>-</file-limit>
+                <soft-file-limit>-</soft-file-limit>
+            </quota>
+        </quotas>
+    </results>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-report [Execution Time: 1008 ms] -->
+    <results status='passed'>
+        <quotas/>
+        <error>
+            <status>failed</status>
+            <errno>13001</errno>
+            <reason>Quotas are off.</reason>
+        </error>
+    </results>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-report [Execution Time: 1006 ms] -->
+    <results status='passed'>
+        <quotas/>
+        <error>
+            <status>failed</status>
+            <errno>13001</errno>
+            <reason>The file specified by the path argument cannot be found.</reason>
+        </error>
+    </results>
+</netapp>

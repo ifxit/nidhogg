@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.21">
+  <cifs-share-access-control-create>
+    <permission>full_control</permission>
+    <share>userdir</share>
+    <user-or-group>userdir</user-or-group>
+  </cifs-share-access-control-create>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-access-control-create [Execution Time: 350 ms] -->
+    <results status='passed'/>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-access-control-create [Execution Time: 170 ms] -->
+    <results errno='13130' status='failed' reason='duplicate entry'/>
+</netapp>
+
+
+NT-Style rights
+- "full_control"
+- "read"
+- "change"
+- "no_access"

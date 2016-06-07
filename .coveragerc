@@ -1,0 +1,18 @@
+[html]
+directory = coverage
+
+[xml]
+output = coverage.xml
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    if self.debug:
+    if settings.DEBUG
+    except AssertionError
+    raise NotImplementedError
+
+omit =
+    nidhogg/spike*.py
+    nidhogg/setup.py

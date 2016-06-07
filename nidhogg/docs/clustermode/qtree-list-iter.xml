@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.21">
+  <qtree-list-iter>
+    <query>
+      <qtree-info>
+        <volume>test002</volume>
+      </qtree-info>
+    </query>
+  </qtree-list-iter>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of qtree-list-iter [Execution Time: 160 ms] -->
+    <results status='passed'>
+        <attributes-list>
+            <qtree-info>
+                <export-policy>RD-Unix</export-policy>
+                <id>0</id>
+                <is-export-policy-inherited>true</is-export-policy-inherited>
+                <oplocks>enabled</oplocks>
+                <qtree/>
+                <security-style>unix</security-style>
+                <status>normal</status>
+                <volume>test001</volume>
+                <vserver>filer101sm</vserver>
+            </qtree-info>
+        </attributes-list>
+        <num-records>1</num-records>
+    </results>
+</netapp>
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of qtree-list-iter [Execution Time: 370 ms] -->
+    <results status='passed'>
+        <attributes-list>
+            <qtree-info>
+                <export-policy>default</export-policy>
+                <id>0</id>
+                <is-export-policy-inherited>true</is-export-policy-inherited>
+                <oplocks>enabled</oplocks>
+                <qtree/>
+                <security-style>unix</security-style>
+                <status>normal</status>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </qtree-info>
+            <qtree-info>
+                <export-policy>default</export-policy>
+                <id>1</id>
+                <is-export-policy-inherited>true</is-export-policy-inherited>
+                <oplocks>enabled</oplocks>
+                <qtree>quotatest</qtree>
+                <security-style>unix</security-style>
+                <status>normal</status>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </qtree-info>
+            <qtree-info>
+                <export-policy>default</export-policy>
+                <id>2</id>
+                <is-export-policy-inherited>true</is-export-policy-inherited>
+                <oplocks>enabled</oplocks>
+                <qtree>quotatest2</qtree>
+                <security-style>unix</security-style>
+                <status>normal</status>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </qtree-info>
+            <qtree-info>
+                <export-policy>default</export-policy>
+                <id>3</id>
+                <is-export-policy-inherited>true</is-export-policy-inherited>
+                <oplocks>enabled</oplocks>
+                <qtree>quotatest3</qtree>
+                <security-style>unix</security-style>
+                <status>normal</status>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </qtree-info>
+            <qtree-info>
+                <export-policy>default</export-policy>
+                <id>4</id>
+                <is-export-policy-inherited>true</is-export-policy-inherited>
+                <oplocks>enabled</oplocks>
+                <qtree>userdir</qtree>
+                <security-style>unix</security-style>
+                <status>normal</status>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </qtree-info>
+            <qtree-info>
+                <export-policy>default</export-policy>
+                <id>5</id>
+                <is-export-policy-inherited>true</is-export-policy-inherited>
+                <oplocks>enabled</oplocks>
+                <qtree>hallo</qtree>
+                <security-style>unix</security-style>
+                <status>normal</status>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </qtree-info>
+        </attributes-list>
+        <num-records>6</num-records>
+    </results>
+</netapp>
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of qtree-list-iter [Execution Time: 230 ms] -->
+    <results status='passed'>
+        <num-records>0</num-records>
+    </results>
+</netapp>
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of qtree-list-iter [Execution Time: 190 ms] -->
+    <results errno='13115' status='failed' reason='Invalid integer value for max-records: (null)'/>
+</netapp>

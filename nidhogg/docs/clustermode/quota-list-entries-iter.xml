@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.21">
+  <quota-list-entries-iter>
+    <query>
+      <quota-entry>
+        <quota-target>/vol/test002/userdir</quota-target>
+      </quota-entry>
+    </query>
+  </quota-list-entries-iter>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-list-entries-iter [Execution Time: 170 ms] -->
+    <results status='passed'>
+        <attributes-list>
+            <quota-entry>
+                <disk-limit>1234</disk-limit>
+                <file-limit>-</file-limit>
+                <policy>default</policy>
+                <qtree/>
+                <quota-target>/vol/test002/userdir</quota-target>
+                <quota-type>tree</quota-type>
+                <soft-disk-limit>987</soft-disk-limit>
+                <soft-file-limit>-</soft-file-limit>
+                <threshold>-</threshold>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </quota-entry>
+        </attributes-list>
+        <num-records>1</num-records>
+    </results>
+</netapp>
+
+<!-- list quotas of volume -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.21">
+  <quota-list-entries-iter>
+    <query>
+      <quota-entry>
+        <volume>test002</volume>
+      </quota-entry>
+    </query>
+  </quota-list-entries-iter>
+</netapp>
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-list-entries-iter [Execution Time: 380 ms] -->
+    <results status='passed'>
+        <attributes-list>
+            <quota-entry>
+                <disk-limit>1048576</disk-limit>
+                <file-limit>-</file-limit>
+                <policy>default</policy>
+                <qtree/>
+                <quota-target>*</quota-target>
+                <quota-type>tree</quota-type>
+                <soft-disk-limit>819200</soft-disk-limit>
+                <soft-file-limit>-</soft-file-limit>
+                <threshold>-</threshold>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </quota-entry>
+            <quota-entry>
+                <disk-limit>3145728</disk-limit>
+                <file-limit>-</file-limit>
+                <policy>default</policy>
+                <qtree/>
+                <quota-target>/vol/test002/quotatest</quota-target>
+                <quota-type>tree</quota-type>
+                <soft-disk-limit>2516582</soft-disk-limit>
+                <soft-file-limit>-</soft-file-limit>
+                <threshold>-</threshold>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </quota-entry>
+            <quota-entry>
+                <disk-limit>3145728</disk-limit>
+                <file-limit>-</file-limit>
+                <policy>default</policy>
+                <qtree/>
+                <quota-target>/vol/test002/quotatest3</quota-target>
+                <quota-type>tree</quota-type>
+                <soft-disk-limit>2516582</soft-disk-limit>
+                <soft-file-limit>-</soft-file-limit>
+                <threshold>-</threshold>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </quota-entry>
+            <quota-entry>
+                <disk-limit>2097152</disk-limit>
+                <file-limit>-</file-limit>
+                <policy>default</policy>
+                <qtree/>
+                <quota-target>/vol/test002/userdir</quota-target>
+                <quota-type>tree</quota-type>
+                <soft-disk-limit>1677722</soft-disk-limit>
+                <soft-file-limit>-</soft-file-limit>
+                <threshold>-</threshold>
+                <volume>test002</volume>
+                <vserver>filer101sm</vserver>
+            </quota-entry>
+        </attributes-list>
+        <num-records>4</num-records>
+    </results>
+</netapp>
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.21' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of quota-list-entries-iter [Execution Time: 180 ms] -->
+    <results status='passed'>
+        <num-records>0</num-records>
+    </results>
+</netapp>

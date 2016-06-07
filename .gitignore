@@ -1,0 +1,60 @@
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.cache/
+.coverage
+.tox
+junit.xml
+coverage
+coverage.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Complexity
+output/*.html
+output/*/index.html
+
+# Sphinx
+docs/_build
+
+# Cookiecutter
+output/
+boilerplate/
+
+# local developer test files
+test.py
+spike*
+
+# pycharm
+# All the settings files in the .idea directory should be put under version control except the workspace.xml, which stores your local preferences. The workspace.xml file should be marked as ignored by VCS. 
+# http://www.jetbrains.com/pycharm/webhelp/project.html
+.idea/workspace.xml
+
+# virtual env
+.env

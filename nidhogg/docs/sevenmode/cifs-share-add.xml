@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<netapp  xmlns="http://www.netapp.com/filer/admin" version="1.19">
+  <cifs-share-add>
+    <comment>asdf</comment>
+    <forcegroup>luma</forcegroup>
+    <path>/vol/test001/hallo</path>
+    <share-name>hallo</share-name>
+    <umask>007</umask>
+  </cifs-share-add>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-add [Execution Time: 1070 ms] -->
+    <results status='passed'/>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-add [Execution Time: 1030 ms] -->
+    <results errno='13203' reason='There is already a share named hallo. ' status='failed'/>
+</netapp>
+
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<netapp version='1.1' xmlns='http://www.netapp.com/filer/admin'>
+
+    <!-- Output of cifs-share-add [Execution Time: 1030 ms] -->
+    <results errno='22' reason='Directory "/vol/test001/halloo" does not exist. ' status='failed'/>
+</netapp>
