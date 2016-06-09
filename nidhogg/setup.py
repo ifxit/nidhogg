@@ -10,7 +10,7 @@ def read(fname):
 
 setup(
     name='nidhogg',
-    version='3.1',
+    version='3.2',
     description='wrapper interface to Netapp filers',
     long_description=read('README.rst'),
     author='Christian Assing, Roland Wohlfahrt',
