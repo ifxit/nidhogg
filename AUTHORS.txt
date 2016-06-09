@@ -1,0 +1,4 @@
+Authors are:
+
+- Christian Assing (https://github.com/chassing)
+- Roland Wohlfahrt (https://github.com/rolze)
