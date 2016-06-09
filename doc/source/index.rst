@@ -31,8 +31,8 @@ Contents:
 Purpose
 =======
 
-This library is a wrapper interface to a **Netapp filer** accross **all versions and technologies** (sevenmode, vserver)
-using the native Netapp REST API. It provides a common interface for the most common operations.
+This library is a wrapper interface to **Netapp filers** accross **versions and technologies** (sevenmode, vserver)
+using the native Netapp REST API. It provides a consistent interface for the most common operations.
 
 
 Installation
@@ -58,18 +58,6 @@ Planned further work
 
 * support snapmirror methods for Netapp vserver mode
 * add EMC Isilon wrapper
-
-
-Nidhogg? Is this an acronym? Or what!?
-======================================
-
-No acronym, go to http://en.wikipedia.org/wiki/Nidhogg.
-
-If you want to use it as an acronym, here are some suggestions:
-
-* **N**\ ifty **I**\ nterface **D**\ eveloped by **H**\ andsome **O**\ doriferous **G**\ entle **G**\ eeks
-* **N**\ ETAPP **I**\ nterface **D**\ one **H**\ iding **O**\ bscure **G**\ rotty **G**\ arbage
-* ...
 
 
 Indices and tables

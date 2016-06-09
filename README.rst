@@ -20,9 +20,8 @@ Please help out
 ===============
 
 This project is still under development. Feedback and suggestions are
-very welcome and I encourage you to use the `Issues list
-<http://github.com/ifxit/nidhogg/issues>`_ on Github to provide that
-feedback.
+very welcome and I encourage you to use the `Issues list <http://github.com/ifxit/nidhogg/issues>`_
+on Github to provide that feedback.
 
 Feel free to fork this repo and to commit your additions. For a list
 of all contributors, please see the file `AUTHORS.txt`.
@@ -52,6 +51,12 @@ Usage
 
 
 Attention: The ``username`` must be allowed to access the NetApp REST API.
+
+
+Documentation
+=============
+
+Look at the `API documentation <https://nidhogg.readthedocs.org>`_.
 
 
 Planned further work
