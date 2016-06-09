@@ -2,26 +2,23 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from setuptools import setup, find_packages
+import os
 
 
-with open('README.rst') as file:
-    long_description = file.read()
-
-with open('LICENSE.txt') as file:
-    license = file.read()
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
     name='nidhogg',
     version='3.1',
     description='wrapper interface to Netapp filers',
-    long_description=long_description,
+    long_description=read('README.rst'),
     author='Christian Assing, Roland Wohlfahrt',
     author_email='christian.assing@infineon.com, roland.wohlfahrt-ee@infineon.com',
     url='https://github.com/ifxit/nidhogg',
     packages=find_packages(exclude=['tests']),
-    include_package_data=True,
     install_requires=open("requirements.txt").readlines(),
-    license=license,
+    license=read('LICENSE.txt'),
     platforms='any',
     keywords='netapp vserver sevenmode ontapi',
     classifiers=[
