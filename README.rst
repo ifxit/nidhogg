@@ -3,13 +3,13 @@ nidhogg
 =======
 
 Nidhogg is a wrapper interface to **Netapp filers** accross **versions and technologies** (sevenmode, vserver)
-using the native Netapp REST API. It provides a common interface for the most common operations.
+using the native Netapp REST API. It provides a consistent interface for the most common operations.
 
 
 Installing nidhogg
 ==================
 
-You can install ``nidhogg``, using::
+You can install ``nidhogg`` using::
 
     pip install nidhogg
 
