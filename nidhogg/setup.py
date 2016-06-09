@@ -4,10 +4,10 @@ from __future__ import unicode_literals
 from setuptools import setup, find_packages
 
 
-with open('../README.rst') as file:
+with open('README.rst') as file:
     long_description = file.read()
 
-with open('../LICENSE.txt') as file:
+with open('LICENSE.txt') as file:
     license = file.read()
 
 setup(
