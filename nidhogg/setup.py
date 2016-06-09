@@ -12,7 +12,7 @@ with open('LICENSE.txt') as file:
 
 setup(
     name='nidhogg',
-    version='3.1',
+    version='3.2',
     description='wrapper interface to Netapp filers',
     long_description=long_description,
     author='Christian Assing, Roland Wohlfahrt',
