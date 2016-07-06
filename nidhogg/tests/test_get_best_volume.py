@@ -9,7 +9,7 @@ from nidhogg.compatible import Volume, VolumeWithQuotaRatio
 
 
 def check_volume(volume, size):
-    """ Helper function that is applied to check if the volume is suitable. """
+    """Helper function that is applied to check if the volume is suitable."""
     size *= 1048576   # convert to byte
     size *= 1.2       # add buffer to the given size
     max_file_count = 32000000

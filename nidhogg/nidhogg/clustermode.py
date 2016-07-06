@@ -11,7 +11,7 @@ except ImportError:     # pragma: no cover
 from time import sleep
 from .core import Nidhogg, NidhoggException
 import nidhogg.core     # this style needed for patching
-from .compatible import Volume, Snapshot, ACE
+from .compatible import Volume, Snapshot, ACE, CifsShare
 
 import logging
 logger = logging.getLogger(__name__)
@@ -22,7 +22,7 @@ MAX_RECORDS = 2 ** 16
 
 
 class ClusterMode(Nidhogg):
-    """ This class implements cluster-mode filer specific API calls. """
+    """This class implements cluster-mode filer specific API calls."""
 
     ACL_FULL_CONTROL = "full_control"       #: ACL permission constant for full control
     ACL_READ = "read"                       #: ACL permission constant for read access
@@ -62,7 +62,7 @@ class ClusterMode(Nidhogg):
     # API FUNCTIONS
     #
     def list_qtrees(self, volume, max_records=MAX_RECORDS):
-        """ Return a list of qtrees of type :class:`~nidhogg.compatible.QTree`.
+        """Return a list of qtrees of type :class:`~nidhogg.compatible.QTree`.
 
         :param volume: name of the volume
         :type volume: str
@@ -95,9 +95,7 @@ class ClusterMode(Nidhogg):
 
     @lru_cache(maxsize=100)
     def list_volumes(self, max_records=MAX_RECORDS):
-        """ list_volumes(self, max_records=MAX_RECORDS)
-
-        Return a list of volumes of type :class:`~nidhogg.compatible.Volume`.
+        """Return a list of volumes of type :class:`~nidhogg.compatible.Volume`.
 
         :param max_records: limit returned records
         :type max_records: int
@@ -123,9 +121,7 @@ class ClusterMode(Nidhogg):
 
     @lru_cache(maxsize=100)
     def volume_info(self, volume):
-        """ volume_info(self, volume)
-
-        Return basic information about the volume.
+        """Return basic information about the volume.
 
         :param volume: name of the volume
         :type volume: str
@@ -144,7 +140,7 @@ class ClusterMode(Nidhogg):
             self.volume_get_iter(**opts)["netapp"]["results"]["attributes-list"]["volume-attributes"])
 
     def list_snapshots(self, target_name, max_records=MAX_RECORDS):
-        """ Return list of snapshots for given volume.
+        """Return list of snapshots for given volume.
 
         :param target_name: name of the volume
         :type target_name: str
@@ -176,7 +172,7 @@ class ClusterMode(Nidhogg):
         return []
 
     def get_quota(self, volume, qtree, max_records=MAX_RECORDS):
-        """ Return the quota of the specified qtree on the given volume.
+        """Return the quota of the specified qtree on the given volume.
 
         :param volume: name of the volume
         :type volume: str
@@ -203,7 +199,7 @@ class ClusterMode(Nidhogg):
         return {}
 
     def list_quotas(self, volume, max_records=MAX_RECORDS):
-        """ Return a list of quota reports of the specified volume.
+        """Return a list of quota reports of the specified volume.
 
         :param volume: name of the volume
         :type volume: str
@@ -234,8 +230,33 @@ class ClusterMode(Nidhogg):
         logger.warn("list_quotas: no entries found")
         return []
 
+    def list_cifs_shares(self):
+        """List all cifs shares.
+
+        :return: list of cifs shares
+        :rtype: list of :class:`~nidhogg.compatible.CifsShare` or empty list
+        :raises NidhoggException: if an error occurs
+        """
+        opts = dict(
+            max_records=2 ** 32 - 1
+        )
+
+        results = self.cifs_share_get_iter(**opts)['netapp']['results']
+
+        if int(results['num-records']) > 1:
+            return [
+                CifsShare(path=item['path'], share_name=item['share-name'])
+                for item in results['attributes-list']['cifs-share']
+            ]
+        elif int(results['num-records']) == 1:
+            return [
+                CifsShare(path=results['attributes-list']['cifs-share']['path'], share_name=results['attributes-list']['cifs-share']['share-name'])
+            ]
+        logger.warning("list_cifs_shares: cifs shares found")
+        return []
+
     def create_cifs_share(self, volume, qtree, share_name, group_name=None, comment=None, umask="007"):
-        """ Create a cifs share.
+        """Create a cifs share.
 
         :param volume: name of the volume
         :type volume: str
@@ -264,7 +285,7 @@ class ClusterMode(Nidhogg):
         self.cifs_share_create(**opts)
 
     def set_cifs_acl(self, share_name, user="everyone", right=ACL_READ, set_group_rights=None):
-        """ Set a single ACL for the specifed share.
+        """Set a single ACL for the specifed share.
 
         :param share_name: name of the share
         :type share_name: str
@@ -298,7 +319,7 @@ class ClusterMode(Nidhogg):
         self.cifs_share_access_control_create(**opts)
 
     def list_cifs_acls(self, share_name, max_records=MAX_RECORDS):
-        """ Return ACL of the specified share.
+        """Return ACL of the specified share.
 
         :param share_name: name of the share
         :type share_name: str
@@ -330,7 +351,7 @@ class ClusterMode(Nidhogg):
         return []
 
     def delete_cifs_acl(self, share_name, user_or_group, is_group=None):
-        """ Delete cifs ACL of the specified user or group.
+        """Delete cifs ACL of the specified user or group.
 
         :param share_name: name of the share
         :type share_name: str
@@ -348,7 +369,7 @@ class ClusterMode(Nidhogg):
         self.cifs_share_access_control_delete(**opts)
 
     def delete_cifs_acls(self, share_name):
-        """ Remove all cifs permssions.
+        """Remove all cifs permssions.
 
         :param share_name: name of the share
         :type share_name: str
@@ -362,7 +383,7 @@ class ClusterMode(Nidhogg):
             )
 
     def set_quota(self, volume, qtree, quota_in_mb=1024, wait_til_finished=True):
-        """ Set a quota in MiB (default = 1GiB) for the specified volume and qtree.
+        """Set a quota in MiB (default = 1GiB) for the specified volume and qtree.
 
         :param volume: name of the volume
         :type volume: str
@@ -408,7 +429,7 @@ class ClusterMode(Nidhogg):
             raise NidhoggException("Quota resize did not finish in time.")
 
     def delete_quota(self, volume, qtree):
-        """ Delete the quota of the specified volume and qtree.
+        """Delete the quota of the specified volume and qtree.
 
         :param volume: name of the volume
         :type volume: str
@@ -428,23 +449,23 @@ class ClusterMode(Nidhogg):
         )
 
     def update_snapmirror(self, destination_volume, destination_qtree=None):
-        """ Trigger the snapmirror replication. """
+        """Trigger the snapmirror replication."""
         if destination_qtree:           # pragma: no cover
             raise NidhoggException("param destination_qtree not supported in cluster mode")
         raise NotImplementedError()     # pragma: no cover
 
     def update_snapmirror_with_snapshot(self, name, destination_volume, destination_qtree=None):
-        """ Update the named snapshot to the snapmirror destination. """
+        """Update the named snapshot to the snapmirror destination."""
         if destination_qtree:           # pragma: no cover
             raise NidhoggException("param destination_qtree not supported in cluster mode")
         raise NotImplementedError()     # pragma: no cover
 
     def get_snapmirror_status(self, volume=None, qtree=None):
-        """ Get status the snapmirror replication. """
+        """Get status the snapmirror replication."""
         if qtree:                       # pragma: no cover
             raise NidhoggException("param qtree not supported in cluster mode")
         raise NotImplementedError()     # pragma: no cover
 
     def get_snapmirror_volume_status(self, volume):
-        """ Get status the snapmirror replication. """
+        """Get status the snapmirror replication."""
         raise NotImplementedError()     # pragma: no cover

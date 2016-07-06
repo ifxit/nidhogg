@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import pytest
 import mock
 
-from nidhogg.core import Nidhogg, NidhoggException
+from nidhogg.core import NidhoggException
 from nidhogg.sevenmode import SevenMode
 from nidhogg.clustermode import ClusterMode
 

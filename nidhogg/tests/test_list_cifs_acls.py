@@ -39,40 +39,40 @@ def test_list_cifs_acls_clustermode_api(clustermode):
 
 
 seven_ret_value = {
-        'cifs-share-acls': {
-            'cifs-share-acl-info': {
-                'share-name': "share1",
-                'user-acl-info': {
-                    "access-rights-info": [
-                        {
-                            'user-name': "user1",
-                            'access-rights': "full_control",
-                        }, {
-                            'unix-group-name': "user2",
-                            'access-rights': "r-x",
-                        }
-                    ],
-                }
+    'cifs-share-acls': {
+        'cifs-share-acl-info': {
+            'share-name': "share1",
+            'user-acl-info': {
+                "access-rights-info": [
+                    {
+                        'user-name': "user1",
+                        'access-rights': "full_control",
+                    }, {
+                        'unix-group-name': "user2",
+                        'access-rights': "r-x",
+                    }
+                ],
             }
         }
     }
+}
 
 cluster_ret_value = {
-        'num-records': "2",
-        'attributes-list': {
-            'cifs-share-access-control': [{
-                'permission': "full_control",
-                'share': "share1",
-                'user-or-group': "user1",
-                # 'user-group-type': "windows"
-            }, {
-                'permission': "r-x",
-                'share': "share1",
-                'user-or-group': "user2",
-                # 'user-group-type': "unix_user"
-            }]
-        }
+    'num-records': "2",
+    'attributes-list': {
+        'cifs-share-access-control': [{
+            'permission': "full_control",
+            'share': "share1",
+            'user-or-group': "user1",
+            # 'user-group-type': "windows"
+        }, {
+            'permission': "r-x",
+            'share': "share1",
+            'user-or-group': "user2",
+            # 'user-group-type': "unix_user"
+        }]
     }
+}
 
 
 @pytest.mark.parametrize('mode', [

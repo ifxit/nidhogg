@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 
 def underline_to_dash(d):
-    """ Helper function to replace "_" to "-" in keys of specifed dictionary recursively.
+    """Helper function to replace "_" to "-" in keys of specifed dictionary recursively.
 
     Netapp API uses "-" in XML parameters.
 
@@ -24,7 +24,7 @@ def underline_to_dash(d):
 
 
 def safe_get(d, key):
-    """ Helper function.
+    """Helper function.
 
     :param d: dictionary
     :type d: dict

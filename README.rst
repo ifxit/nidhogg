@@ -2,6 +2,10 @@
 nidhogg
 =======
 
+.. image:: https://travis-ci.org/ifxit/nidhogg.svg?branch=master
+    :target: https://travis-ci.org/ifxit/nidhogg
+
+
 Nidhogg is a wrapper interface to **Netapp filers** accross **versions and technologies** (sevenmode, vserver)
 using the native Netapp REST API. It provides a consistent interface for the most common operations.
 

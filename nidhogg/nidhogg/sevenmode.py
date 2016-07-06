@@ -11,7 +11,7 @@ except ImportError:     # pragma: no cover
 from time import sleep
 from .core import Nidhogg, NidhoggException
 import nidhogg.core     # this style needed for patching
-from .compatible import Volume, Snapshot, ACE, SnapmirrorStatus, SnapmirrorVolumeStatus
+from .compatible import Volume, Snapshot, ACE, SnapmirrorStatus, SnapmirrorVolumeStatus, CifsShare
 from .utils import safe_get
 
 import logging
@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 
 class SevenMode(Nidhogg):
-    """ This class implements seven-mode filer specific API calls. """
+    """This class implements seven-mode filer specific API calls."""
 
     #: ACL permission constant for full control
     ACL_FULL_CONTROL = "Full Control"
@@ -93,7 +93,7 @@ class SevenMode(Nidhogg):
     # API FUNCTIONS
     #
     def list_qtrees(self, volume):
-        """ Return a list of qtrees of type :class:`~nidhogg.compatible.QTree`.
+        """Return a list of qtrees of type :class:`~nidhogg.compatible.QTree`.
 
         :param volume: name of the volume
         :type volume: str
@@ -117,9 +117,7 @@ class SevenMode(Nidhogg):
 
     @lru_cache(maxsize=100)
     def list_volumes(self):
-        """ list_volumes(self)
-
-        Return a list of volumes of type :class:`~nidhogg.compatible.Volume`.
+        """Return a list of volumes of type :class:`~nidhogg.compatible.Volume`.
 
         :return: list of volumes
         :rtype: list of :class:`~nidhogg.compatible.Volume` or empty list
@@ -141,9 +139,7 @@ class SevenMode(Nidhogg):
 
     @lru_cache(maxsize=100)
     def volume_info(self, volume):
-        """ volume_info(self, volume)
-
-        Return basic information about the volume.
+        """Return basic information about the volume.
 
         :param volume: name of the volume
         :type volume: str
@@ -154,7 +150,7 @@ class SevenMode(Nidhogg):
         return self._item_to_volume(self.volume_list_info(volume=volume)["netapp"]["results"]['volumes']['volume-info'])
 
     def list_snapshots(self, target_name, target_type="volume"):
-        """ Return list of snapshots for given volume.
+        """Return list of snapshots for given volume.
 
         :param target_name: name of the volume
         :type target_name: str
@@ -183,7 +179,7 @@ class SevenMode(Nidhogg):
         return []
 
     def get_quota(self, volume, qtree):
-        """ Return the quota of the specified qtree on the given volume.
+        """Return the quota of the specified qtree on the given volume.
 
         :param volume: name of the volume
         :type volume: str
@@ -202,7 +198,7 @@ class SevenMode(Nidhogg):
         )
 
     def list_quotas(self, volume):
-        """ Return a list of quota reports of the specified volume.
+        """Return a list of quota reports of the specified volume.
 
         :param volume: name of the volume
         :type volume: str
@@ -229,8 +225,39 @@ class SevenMode(Nidhogg):
         logger.warn("list_quotas: no entries found")
         return []
 
+    def _start_cifs_shares(self):
+        return self.cifs_share_list_iter_start()
+
+    def _get_cifs_shares(self, tag):
+        return self.cifs_share_list_iter_next(tag=tag, maximum=1000000)
+
+    def _end_cifs_shares(self, tag):
+        return self.cifs_share_list_iter_end(tag=tag)
+
+    def list_cifs_shares(self):
+        """List all cifs shares.
+
+        :return: list of cifs shares
+        :rtype: list of :class:`~nidhogg.compatible.CifsShare` or empty list
+        :raises NidhoggException: if an error occurs
+        """
+        tag = self._start_cifs_shares()["netapp"]["results"]["tag"]
+        results = self._get_cifs_shares(tag=tag)["netapp"]["results"]
+        self._end_cifs_shares(tag)
+        if int(results['records']) > 1:
+            return [
+                CifsShare(path=item['mount-point'], share_name=item['share-name'])
+                for item in results['cifs-shares']['cifs-share-info']
+            ]
+        elif int(results['records']) == 1:
+            return [
+                CifsShare(path=results['cifs-shares']['cifs-share-info']['mount-point'], share_name=results['cifs-shares']['cifs-share-info']['share-name'])
+            ]
+        logger.warning("list_cifs_shares: cifs shares found")
+        return []
+
     def create_cifs_share(self, volume, qtree, share_name, group_name=None, comment=None, umask="007"):
-        """ Create a cifs share.
+        """Create a cifs share.
 
         :param volume: name of the volume
         :type volume: str
@@ -258,7 +285,7 @@ class SevenMode(Nidhogg):
         self.cifs_share_add(**opts)
 
     def set_cifs_acl(self, share_name, user="everyone", right=ACL_READ, set_group_rights=False):
-        """ Set a single ACL for the specifed share.
+        """Set a single ACL for the specifed share.
 
         :param share_name: name of the share
         :type share_name: str
@@ -300,7 +327,7 @@ class SevenMode(Nidhogg):
         return self.cifs_share_acl_list_iter_end(tag=tag)
 
     def list_cifs_acls(self, share_name):
-        """ Return ACL of the specified share.
+        """Return ACL of the specified share.
 
         :param share_name: name of the share
         :type share_name: str
@@ -329,7 +356,7 @@ class SevenMode(Nidhogg):
         return []
 
     def delete_cifs_acl(self, share_name, user_or_group, is_group=False):
-        """ Delete cifs ACL of the specified user or group.
+        """Delete cifs ACL of the specified user or group.
 
         :param share_name: name of the share
         :type share_name: str
@@ -354,7 +381,7 @@ class SevenMode(Nidhogg):
         self.cifs_share_ace_delete(**opts)
 
     def delete_cifs_acls(self, share_name):
-        """ Remove all cifs permssions.
+        """Remove all cifs permssions.
 
         :param share_name: name of the share
         :type share_name: str
@@ -369,7 +396,7 @@ class SevenMode(Nidhogg):
             )
 
     def set_quota(self, volume, qtree, quota_in_mb=1024, wait_til_finished=True):
-        """ Set a quota in MiB (default = 1GiB) for the specified volume and qtree.
+        """Set a quota in MiB (default = 1GiB) for the specified volume and qtree.
 
         :param volume: name of the volume
         :type volume: str
@@ -413,7 +440,7 @@ class SevenMode(Nidhogg):
             raise NidhoggException("Quota resize did not finish in time.")
 
     def delete_quota(self, volume, qtree):
-        """ Delete the quota of the specified volume and qtree.
+        """Delete the quota of the specified volume and qtree.
 
         :param volume: name of the volume
         :type volume: str
@@ -431,7 +458,7 @@ class SevenMode(Nidhogg):
         )
 
     def update_snapmirror(self, destination_volume, destination_qtree=None, source_filer=None, source_volume=None, source_qtree=None):
-        """ Trigger the snapmirror replication.
+        """Trigger the snapmirror replication.
 
         If source_filer, source_volume and source_qtree (source location) are not specified (default),
         then the source in */etc/snapmirror.conf* for the destination path must be present.
@@ -471,7 +498,7 @@ class SevenMode(Nidhogg):
         self.snapmirror_update(**opts)
 
     def update_snapmirror_with_snapshot(self, name, destination_volume, destination_qtree=None, source_filer=None, source_volume=None, source_qtree=None):
-        """ Update the named snapshot to the snapmirror destination.
+        """Update the named snapshot to the snapmirror destination.
 
         Use the specified snapshot name also for the snapshot to be created on the destination server if possible.
 
@@ -520,7 +547,7 @@ class SevenMode(Nidhogg):
         self.snapmirror_update(**opts)
 
     def get_snapmirror_status(self, volume=None, qtree=None):
-        """ Get status of snapmirror replication pairs. If no params are provided, return all snapmirror status pairs.
+        """Get status of snapmirror replication pairs. If no params are provided, return all snapmirror status pairs.
 
         :param volume: name of source or destination volume
         :type volume: str
@@ -551,7 +578,7 @@ class SevenMode(Nidhogg):
         return []
 
     def get_snapmirror_volume_status(self, volume):
-        """ Get status of a snapmirror volume.
+        """Get status of a snapmirror volume.
 
         :param volume: name of volume
         :type volume: str

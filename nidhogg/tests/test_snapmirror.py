@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import pytest
-
 
 def test_update_snapmirror(sevenmode):
     sevenmode.update_snapmirror("vol")

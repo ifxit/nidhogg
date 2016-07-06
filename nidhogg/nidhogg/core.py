@@ -14,15 +14,15 @@ from cached_property import cached_property
 import xml
 import dicttoxml
 import collections
-
 import logging
-# used the capture urllib3 wannings
-logging.captureWarnings(True)
-logger = logging.getLogger(__name__)
 
 from .http import NidhoggHttp
 from .compatible import QuotaReport, Quota, QTree, VolumeWithQuotaRatio, Volume
 from .utils import underline_to_dash
+
+# used the capture urllib3 wannings
+logging.captureWarnings(True)
+logger = logging.getLogger(__name__)
 
 try:
     import pkg_resources
@@ -38,12 +38,13 @@ QUOTA_RESIZE_WAIT_CYCLES = 20
 
 
 class NidhoggException(Exception):
-    """ Exception wrapper. """
+    """Exception wrapper."""
+
     pass
 
 
 class Nidhogg(object):
-    """ This is the base class for connecting to a NETAPP filer.
+    """This is the base class for connecting to a NETAPP filer.
 
     It provides functions that have 7-mode filers and cluster-mode filers in common.
 
@@ -54,7 +55,7 @@ class Nidhogg(object):
     """
 
     def __init__(self, url, username, password, major, minor, http=NidhoggHttp):
-        """ Init conncetion to filer. """
+        """Init conncetion to filer."""
         self.url = url
         self.major = major
         self.minor = minor
@@ -65,13 +66,13 @@ class Nidhogg(object):
         self.nmsdk_app = "Nidhogg"
 
     def __getattr__(self, api):
-        """ Try to invoke unimplemented API calls directly. """
+        """Try to invoke unimplemented API calls directly."""
         def _api_wrapper(**kwargs):
             return self._do(api, **kwargs)
         return _api_wrapper
 
     def _do(self, api, **kwargs):
-        """ Invoke wrapper, returns a xmldict. """
+        """Invoke wrapper, returns a xmldict."""
         # replace _ -> -
         params = underline_to_dash(kwargs)
         req = self._create_request(**{api.replace("_", "-"): params})
@@ -104,7 +105,7 @@ class Nidhogg(object):
             </netapp>""".strip().replace("            ", "").format(self, xml_request.decode("utf-8"))
 
     def _item_to_quota(self, item):
-        """ Convert to byte (API returns sizes in kbyte) to be consistent with other sizes (i.e. volume info). """
+        """Convert to byte (API returns sizes in kbyte) to be consistent with other sizes (i.e. volume info)."""
         return Quota(
             disk_limit=float(item['disk-limit']) * 1024 if item['disk-limit'].isdigit() else -1,
             soft_disk_limit=float(item['soft-disk-limit']) * 1024 if item['soft-disk-limit'].isdigit() else -1,
@@ -138,7 +139,7 @@ class Nidhogg(object):
     #
     @cached_property
     def vserver(self):
-        """ Hostname of the connected filer.
+        """Hostname of the connected filer.
 
         :return: hostname
         :rtype: str
@@ -147,7 +148,7 @@ class Nidhogg(object):
 
     @cached_property
     def vserver_fqdn(self):
-        """ FQDN of the connected filer.
+        """FQDN of the connected filer.
 
         :return: FQDN of the filer
         :rtype: str
@@ -156,7 +157,7 @@ class Nidhogg(object):
 
     @cached_property
     def clustered(self):
-        """ True if the filer is a cluster-mode filer, false otherwise.
+        """True if the filer is a cluster-mode filer, false otherwise.
 
         :rtype: boolean
         """
@@ -164,7 +165,7 @@ class Nidhogg(object):
 
     @cached_property
     def ontapi_version(self):
-        """ ONTAPI version of the connected filer.
+        """ONTAPI version of the connected filer.
 
         :return: ontapi version
         :rtype: str
@@ -176,7 +177,7 @@ class Nidhogg(object):
 
     @cached_property
     def has_forcegroup(self):
-        """ Check if this cifs share feature is available.
+        """Check if this cifs share feature is available.
 
         :return: true, if feature is available
         :rtype: bool
@@ -190,7 +191,7 @@ class Nidhogg(object):
 
     @cached_property
     def apis(self):
-        """ List of API commands available with the current credentials.
+        """List of API commands available with the current credentials.
 
         :return: list of API commands
         :rtype: list of str or empty list
@@ -207,7 +208,7 @@ class Nidhogg(object):
     # COMMON API FUNCTIONS
     #
     def list_snapable_volumes(self):
-        """ Return a list of *snapable* volumes.
+        """Return a list of *snapable* volumes.
 
         That means, ignore volumes that are used as a snapmirror destination.
 
@@ -222,7 +223,7 @@ class Nidhogg(object):
         return vols
 
     def create_snapshot(self, volume, name):
-        """ Create a snapshot.
+        """Create a snapshot.
 
         :param volume: name of the volume
         :type volume: str
@@ -233,7 +234,7 @@ class Nidhogg(object):
         return self.snapshot_create(volume=volume, snapshot=name)
 
     def delete_snapshot(self, volume, name):
-        """ Delete a snapshot.
+        """Delete a snapshot.
 
         :param volume: name of the volume
         :type volume: str
@@ -244,7 +245,7 @@ class Nidhogg(object):
         return self.snapshot_delete(volume=volume, snapshot=name)
 
     def create_qtree(self, volume, qtree, mode="007"):
-        """ Create a qtree on the specified volume.
+        """Create a qtree on the specified volume.
 
         :param volume: name of the volume
         :type volume: str
@@ -257,7 +258,7 @@ class Nidhogg(object):
         self.qtree_create(volume=volume, qtree=qtree, mode=mode)
 
     def delete_qtree(self, volume, qtree, force=False):
-        """ Delete a qtree on the specified volume.
+        """Delete a qtree on the specified volume.
 
         :param volume: name of the volume
         :type volume: str
@@ -270,7 +271,7 @@ class Nidhogg(object):
         self.qtree_delete(force=str(bool(force)), qtree="/vol/{0}/{1}".format(volume, qtree))
 
     def delete_cifs_share(self, share_name):
-        """ Delete the share with the given name.
+        """Delete the share with the given name.
 
         :param share_name: name of the share
         :type share_name: str
@@ -279,7 +280,7 @@ class Nidhogg(object):
         self.cifs_share_delete(share_name=share_name)
 
     def exists_qtree(self, volume, qtree):
-        """ Check if a qtree exits.
+        """Check if a qtree exits.
 
         :param volume: name of the volume
         :type volume: str
@@ -296,9 +297,7 @@ class Nidhogg(object):
     #
     @lru_cache(maxsize=100)
     def get_allocated_quota_size(self, volume):
-        """ get_allocated_quota_size(self, volume)
-
-        Return the sum of all quotas of the specified volume.
+        """Return the sum of all quotas of the specified volume.
 
         :param volume: name of the volume
         :type volume: str
@@ -311,9 +310,7 @@ class Nidhogg(object):
 
     @lru_cache(maxsize=100)
     def get_allocated_quota_ratio(self, volume, volume_size_total=None):
-        """ get_allocated_quota_ratio(self, volume, volume_size_total=None)
-
-        Return the ratio *allocated quota size / volume size*.
+        """Return the ratio *allocated quota size / volume size*.
 
         :param volume: name of the volume
         :type volume: str
@@ -329,7 +326,7 @@ class Nidhogg(object):
         return self.get_allocated_quota_size(volume) / self.volume_info(volume)["size_total"]
 
     def get_volumes_with_quota_info(self, filter_volume_names=[]):
-        """ Return a list of snapable volumes of type :class:`~nidhogg.compatible.VolumeWithQuotaRatio`.
+        """Return a list of snapable volumes of type :class:`~nidhogg.compatible.VolumeWithQuotaRatio`.
 
         :param filter_volume_names: consider only volumes that are in this list
         :type filter_volume_names: list of str
@@ -359,7 +356,7 @@ class Nidhogg(object):
         return volumes
 
     def get_volumes(self, filter_volume_names=[]):
-        """ Return a list of snapable volumes of type :class:`~nidhogg.compatible.Volume`.
+        """Return a list of snapable volumes of type :class:`~nidhogg.compatible.Volume`.
 
         :param filter_volume_names: consider only volumes that are in this list
         :type filter_volume_names: list of str
@@ -385,7 +382,7 @@ class Nidhogg(object):
     # API FUNCTIONS implemented in subclasses
     #
     def list_qtrees(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.list_qtrees` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.list_qtrees` (ClusterMode)
@@ -393,7 +390,7 @@ class Nidhogg(object):
         pass    # pragma: no cover
 
     def list_volumes(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.list_volumes` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.list_volumes` (ClusterMode)
@@ -401,7 +398,7 @@ class Nidhogg(object):
         pass    # pragma: no cover
 
     def volume_info(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.volume_info` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.volume_info` (ClusterMode)
@@ -409,7 +406,7 @@ class Nidhogg(object):
         pass    # pragma: no cover
 
     def list_snapshots(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.list_snapshots` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.list_snapshots` (ClusterMode)
@@ -417,7 +414,7 @@ class Nidhogg(object):
         pass    # pragma: no cover
 
     def get_quota(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.get_quota` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.get_quota` (ClusterMode)
@@ -425,15 +422,23 @@ class Nidhogg(object):
         pass    # pragma: no cover
 
     def list_quotas(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.list_quotas` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.list_quotas` (ClusterMode)
         """
         pass    # pragma: no cover
 
+    def list_cifs_shares(self, *args, **kwargs):
+        """See sub classes.
+
+        * Go to :py:meth:`~.SevenMode.list_cifs_shares` (SevenMode)
+        * Go to :py:meth:`~.ClusterMode.list_cifs_shares` (ClusterMode)
+        """
+        pass    # pragma: no cover
+
     def create_cifs_share(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.create_cifs_share` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.create_cifs_share` (ClusterMode)
@@ -441,7 +446,7 @@ class Nidhogg(object):
         pass    # pragma: no cover
 
     def set_cifs_acl(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.set_cifs_acl` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.set_cifs_acl` (ClusterMode)
@@ -449,7 +454,7 @@ class Nidhogg(object):
         pass    # pragma: no cover
 
     def list_cifs_acls(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.list_cifs_acls` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.list_cifs_acls` (ClusterMode)
@@ -457,7 +462,7 @@ class Nidhogg(object):
         pass    # pragma: no cover
 
     def delete_cifs_acl(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.delete_cifs_acl` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.delete_cifs_acl` (ClusterMode)
@@ -465,7 +470,7 @@ class Nidhogg(object):
         pass    # pragma: no cover
 
     def delete_cifs_acls(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.delete_cifs_acls` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.delete_cifs_acls` (ClusterMode)
@@ -473,7 +478,7 @@ class Nidhogg(object):
         pass    # pragma: no cover
 
     def set_quota(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.set_quota` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.set_quota` (ClusterMode)
@@ -481,7 +486,7 @@ class Nidhogg(object):
         pass    # pragma: no cover
 
     def delete_quota(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.delete_quota` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.delete_quota` (ClusterMode)
@@ -489,7 +494,7 @@ class Nidhogg(object):
         pass    # pragma: no cover
 
     def update_snapmirror(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.update_snapmirror` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.update_snapmirror` (ClusterMode)
@@ -497,7 +502,7 @@ class Nidhogg(object):
         pass    # pragma: no cover
 
     def update_snapmirror_with_snapshot(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.update_snapmirror_with_snapshot` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.update_snapmirror_with_snapshot` (ClusterMode)
@@ -505,7 +510,7 @@ class Nidhogg(object):
         pass    # pragma: no cover
 
     def get_snapmirror_status(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.get_snapmirror_status` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.get_snapmirror_status` (ClusterMode)
@@ -513,7 +518,7 @@ class Nidhogg(object):
         pass    # pragma: no cover
 
     def get_snapmirror_volume_status(self, *args, **kwargs):
-        """ See sub classes.
+        """See sub classes.
 
         * Go to :py:meth:`~.SevenMode.get_snapmirror_volume_status` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.get_snapmirror_volume_status` (ClusterMode)

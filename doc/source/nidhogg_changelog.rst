@@ -2,6 +2,31 @@ CHANGELOG
 ===============
 
 
+v3.3
+----
+
+New *list_cifs_shares* method.
+
+* See :py:meth:`~.SevenMode.list_cifs_shares` (SevenMode)
+* See :py:meth:`~.ClusterMode.list_cifs_shares` (ClusterMode)
+
+PEP8 fixes
+
+
+v3.2
+----
+
+setup.py fixes
+
+
+v3.1
+----
+
+Travis testing
+
+setup.py fixes
+
+
 v3.00
 -----
 

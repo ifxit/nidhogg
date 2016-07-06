@@ -10,7 +10,7 @@ __all__ = ["get_netapp", "get_best_volume_by_size", "get_best_volume_by_quota"]
 
 
 def get_netapp(url, username, password):
-    """ Return the correct connection object to the filer.
+    """Return the correct connection object to the filer.
 
     You do not have to care if the filer is a cluster-mode or a seven-mode filer.
 
@@ -46,7 +46,7 @@ def get_netapp(url, username, password):
 
 
 def get_best_volume_by_size(volumes, filter_func=None, **kwargs):
-    """ Return the best volume from the list of volumes with the biggest free size.
+    """Return the best volume from the list of volumes with the biggest free size.
 
     Apply filter function before if specified.
 
@@ -66,7 +66,7 @@ def get_best_volume_by_size(volumes, filter_func=None, **kwargs):
 
 
 def get_best_volume_by_quota(volumes, filter_func=None, **kwargs):
-    """ Return the best volume from the list of volumes with the smallest quota ration.
+    """Return the best volume from the list of volumes with the smallest quota ration.
 
     :param volumes: list of volumes
     :type volumes: list of :class:`~nidhogg.compatible.VolumeWithQuotaRatio`
