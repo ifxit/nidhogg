@@ -11,7 +11,7 @@ except ImportError:     # pragma: no cover
 from time import sleep
 from .core import Nidhogg, NidhoggException
 import nidhogg.core     # this style needed for patching
-from .compatible import Volume, Snapshot, ACE, SnapmirrorStatus, SnapmirrorVolumeStatus
+from .compatible import Volume, Snapshot, ACE, SnapmirrorStatus, SnapmirrorVolumeStatus, CifsShare
 from .utils import safe_get
 
 import logging
@@ -227,6 +227,37 @@ class SevenMode(Nidhogg):
                     self._item_to_quota_report(results["quotas"]["quota"])
                 ]
         logger.warn("list_quotas: no entries found")
+        return []
+
+    def _start_cifs_shares(self):
+        return self.cifs_share_list_iter_start()
+
+    def _get_cifs_shares(self, tag):
+        return self.cifs_share_list_iter_next(tag=tag, maximum=1000000)
+
+    def _end_cifs_shares(self, tag):
+        return self.cifs_share_list_iter_end(tag=tag)
+
+    def list_cifs_shares(self):
+        """List all cifs shares.
+
+        :return: list of cifs shares
+        :rtype: list of :class:`~nidhogg.compatible.CifsShare` or empty list
+        :raises NidhoggException: if an error occurs
+        """
+        tag = self._start_cifs_shares()["netapp"]["results"]["tag"]
+        results = self._get_cifs_shares(tag=tag)["netapp"]["results"]
+        self._end_cifs_shares(tag)
+        if int(results['records']) > 1:
+            return [
+                CifsShare(path=item['mount-point'], share_name=item['share-name'])
+                for item in results['cifs-shares']['cifs-share-info']
+            ]
+        elif int(results['records']) == 1:
+            return [
+                CifsShare(path=results['cifs-shares']['cifs-share-info']['mount-point'], share_name=results['cifs-shares']['cifs-share-info']['share-name'])
+            ]
+        logger.warning("list_cifs_shares: cifs shares found")
         return []
 
     def create_cifs_share(self, volume, qtree, share_name, group_name=None, comment=None, umask="007"):

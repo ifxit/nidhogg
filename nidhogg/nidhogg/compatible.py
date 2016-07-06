@@ -100,3 +100,10 @@ class SnapmirrorVolumeStatus(InitDict):
     required_arguments = [
         "is_source", "is_destination", "is_transfer_in_progress", "is_transfer_broken"
     ]
+
+
+class CifsShare(InitDict):
+    """ Data object representing a cifs share. """
+    required_arguments = [
+        "path", "share_name"
+    ]

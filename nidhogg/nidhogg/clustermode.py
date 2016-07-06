@@ -11,7 +11,7 @@ except ImportError:     # pragma: no cover
 from time import sleep
 from .core import Nidhogg, NidhoggException
 import nidhogg.core     # this style needed for patching
-from .compatible import Volume, Snapshot, ACE
+from .compatible import Volume, Snapshot, ACE, CifsShare
 
 import logging
 logger = logging.getLogger(__name__)
@@ -232,6 +232,31 @@ class ClusterMode(Nidhogg):
                 self._item_to_quota_report(results['attributes-list']['quota'])
             ]
         logger.warn("list_quotas: no entries found")
+        return []
+
+    def list_cifs_shares(self):
+        """List all cifs shares.
+
+        :return: list of cifs shares
+        :rtype: list of :class:`~nidhogg.compatible.CifsShare` or empty list
+        :raises NidhoggException: if an error occurs
+        """
+        opts = dict(
+            max_records=2 ** 32 - 1
+        )
+
+        results = self.cifs_share_get_iter(**opts)['netapp']['results']
+
+        if int(results['num-records']) > 1:
+            return [
+                CifsShare(path=item['path'], share_name=item['share-name'])
+                for item in results['attributes-list']['cifs-share']
+            ]
+        elif int(results['num-records']) == 1:
+            return [
+                CifsShare(path=results['attributes-list']['cifs-share']['path'], share_name=results['attributes-list']['cifs-share']['share-name'])
+            ]
+        logger.warning("list_cifs_shares: cifs shares found")
         return []
 
     def create_cifs_share(self, volume, qtree, share_name, group_name=None, comment=None, umask="007"):
