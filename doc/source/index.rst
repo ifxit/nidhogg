@@ -11,6 +11,10 @@ Welcome to Nidhogg's documentation!
    NetApp Interface done right!
 
 
+.. image:: https://travis-ci.org/ifxit/nidhogg.svg?branch=master
+    :target: https://travis-ci.org/ifxit/nidhogg
+
+
 Contents:
 
 
