@@ -7,7 +7,7 @@ from nidhogg.core import NidhoggException
 
 
 def test_source_volume_missing_1(sevenmode):
-    """ Test missing input params. """
+    """Test missing input params."""
     with pytest.raises(NidhoggException):
         """ no source volume """
         sevenmode.update_snapmirror("dst_volume", source_filer="host")
@@ -38,7 +38,7 @@ def test_source_volume_missing_1(sevenmode):
 
 
 def test_source_volume_missing_2(sevenmode):
-    """ Test missing input params. """
+    """Test missing input params."""
     with pytest.raises(NidhoggException):
         sevenmode.update_snapmirror_with_snapshot("name", "dst_volume", source_filer="host")
 

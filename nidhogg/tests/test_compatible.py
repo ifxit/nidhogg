@@ -6,6 +6,8 @@ from nidhogg.compatible import InitDict
 
 
 class MyTestDict(InitDict):
+    """Just a test class."""
+
     required_arguments = ["fuer", "immer"]
 
 
