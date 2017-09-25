@@ -2,6 +2,14 @@ CHANGELOG
 ===============
 
 
+v3.4
+----
+
+Parameter *verify* added to :py:func:`nidhogg.get_netapp`.
+
+If true, it checks the certificate of the filer. Default is false.
+
+
 v3.3
 ----
 

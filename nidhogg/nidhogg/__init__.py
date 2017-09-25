@@ -24,7 +24,7 @@ def get_netapp(url, username, password, verify=False):
     :type username: str
     :param password: password of the provided user
     :type password: str
-    :param verify: check SSL cert
+    :param verify: check SSL certificate
     :type verify: bool
     :return: Nidhogg instance
     :rtype: :class:`~nidhogg.sevenmode.SevenMode` (if the filer is a seven-mode filer)
