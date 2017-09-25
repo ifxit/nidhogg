@@ -54,12 +54,12 @@ class Nidhogg(object):
     * :class:`~nidhogg.clustermode.ClusterMode`
     """
 
-    def __init__(self, url, username, password, major, minor, http=NidhoggHttp):
+    def __init__(self, url, username, password, major, minor, verify, http=NidhoggHttp):
         """Init conncetion to filer."""
         self.url = url
         self.major = major
         self.minor = minor
-        self.http = http(url, username, password)
+        self.http = http(url, username, password, verify)
         self.xmlns = "http://www.netapp.com/filer/admin"
         self.nmsdk_version = version
         self.nmsdk_language = "python"

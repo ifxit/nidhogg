@@ -10,11 +10,12 @@ FILER_URL = "/servlets/netapp.servlets.admin.XMLrequest_filer"
 class NidhoggHttp(object):
     """Requests the Netapp API und converts the response into a dictionary."""
 
-    def __init__(self, url, username, password):
+    def __init__(self, url, username, password, verify=False):
         """Init object."""
         self.url = url + FILER_URL
         self.username = username
         self.password = password
+        self.verify = verify
 
     def parse_xml_reply(self, xmlresponse):
         """Convert XML reply into a dictionary.
@@ -38,6 +39,6 @@ class NidhoggHttp(object):
             self.url, auth=(self.username, self.password),
             data=req,
             headers={'Content-Type': 'text/xml; charset="UTF-8"'},
-            verify=False
+            verify=self.verify
         )
         return r.text

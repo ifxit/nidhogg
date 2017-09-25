@@ -14,7 +14,7 @@ def nidhogg(request, monkeypatch, std_netapp_reply):
         return "req"
     monkeypatch.setattr("nidhogg.core.Nidhogg._create_request", create_request_mock)
     mock_http = MagicMock()
-    nidhogg = Nidhogg("url", "user", "password", 1, 1, mock_http)
+    nidhogg = Nidhogg("url", "user", "password", 1, 1, False, mock_http)
     nidhogg.http.invoke_request.return_value = "reply"
     nidhogg.http.parse_xml_reply.return_value = std_netapp_reply
     return nidhogg

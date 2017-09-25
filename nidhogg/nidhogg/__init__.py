@@ -9,7 +9,7 @@ from .core import NidhoggException
 __all__ = ["get_netapp", "get_best_volume_by_size", "get_best_volume_by_quota"]
 
 
-def get_netapp(url, username, password):
+def get_netapp(url, username, password, verify=False):
     """Return the correct connection object to the filer.
 
     You do not have to care if the filer is a cluster-mode or a seven-mode filer.
@@ -24,6 +24,8 @@ def get_netapp(url, username, password):
     :type username: str
     :param password: password of the provided user
     :type password: str
+    :param verify: check SSL cert
+    :type verify: bool
     :return: Nidhogg instance
     :rtype: :class:`~nidhogg.sevenmode.SevenMode` (if the filer is a seven-mode filer)
     :rtype: :class:`~nidhogg.clustermode.ClusterMode` (if the filer is a cluster-mode filer)
@@ -39,9 +41,9 @@ def get_netapp(url, username, password):
     # prepend https if not specified
     if not url.startswith("https://"):
         url = "https://" + url
-    nidhogg = SevenMode(url, username, password, 1, 15)
+    nidhogg = SevenMode(url, username, password, 1, 15, verify)
     if nidhogg.clustered:
-        return ClusterMode(url, username, password, 1, 21)
+        return ClusterMode(url, username, password, 1, 21, verify)
     return nidhogg
 
 

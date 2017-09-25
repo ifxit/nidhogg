@@ -21,7 +21,7 @@ def do_mock(self, key, **kwargs):
 
 
 def get_sevenmode():
-    n = SevenMode("https://my.url.to.filer", "user", "password", 1, 1)
+    n = SevenMode("https://my.url.to.filer", "user", "password", 1, 1, False)
     n.sent = []
     return n
 
@@ -43,7 +43,7 @@ def sevenmode_failed(request, monkeypatch):
 
 
 def get_clustermode():
-    n = ClusterMode("https://my.url.to.filer", "user", "password", 1, 1)
+    n = ClusterMode("https://my.url.to.filer", "user", "password", 1, 1, False)
     n.sent = []
     return n
 
@@ -74,7 +74,7 @@ def mode(request, monkeypatch):
     # See http://pytest.org/latest/example/parametrize.html#deferring-the-setup-of-parametrized-resources
     klass, results = request.param
     monkeypatch.setattr("{0}.{1}._do".format(klass.__module__, klass.__name__), do_mock)
-    n = klass("https://my.url.to.filer", "user", "password", 1, 1)
+    n = klass("https://my.url.to.filer", "user", "password", 1, 1, False)
     n.sent = []
     n.patched_return_value = {'netapp': {'results': results}}
     return n
