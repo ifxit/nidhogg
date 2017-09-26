@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import os
-from setuptools import setup, find_packages
+from setuptools import setup
 
 
 def read(fname):
@@ -23,7 +23,7 @@ setup(
     author='Christian Assing, Roland Wohlfahrt',
     author_email='christian.assing@infineon.com, roland.wohlfahrt@infineon.com',
     url='https://github.com/ifxit/nidhogg',
-    packages=find_packages(),
+    packages=["nidhogg"],
     install_requires=open("requirements.txt").readlines(),
     license=read("LICENSE.txt"),
     platforms='any',
