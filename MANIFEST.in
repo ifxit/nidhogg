@@ -1,5 +1,4 @@
-include LICENSE.txt
-include README.rst
+include README.rst LICENSE.txt
 exclude .coveragerc
 exclude requirements-*.txt
 exclude .bumpversion.cfg
