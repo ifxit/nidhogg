@@ -2,8 +2,8 @@ CHANGELOG
 ===============
 
 
-v3.4
-----
+v3.4.2
+------
 
 Parameter *verify* added to :py:func:`nidhogg.get_netapp`.
 
