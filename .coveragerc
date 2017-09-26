@@ -14,5 +14,5 @@ exclude_lines =
     raise NotImplementedError
 
 omit =
-    nidhogg/spike*.py
-    nidhogg/setup.py
+    spike*.py
+    setup.py

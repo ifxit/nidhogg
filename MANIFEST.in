@@ -1,0 +1,11 @@
+include LICENSE.txt
+include README.rst
+exclude .coveragerc
+exclude requirements-*.txt
+exclude .bumpversion.cfg
+exclude .travis.yml
+exclude pytest.ini
+exclude .gitignore
+prune tests
+prune doc
+prune xml

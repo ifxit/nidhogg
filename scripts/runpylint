@@ -1,4 +1,0 @@
-#!/bin/bash
-
-export `grep VIRTUAL_ENV $WORKSPACE/.env`
-$VIRTUAL_ENV/bin/pylint $*
