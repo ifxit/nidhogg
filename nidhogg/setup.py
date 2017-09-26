@@ -14,7 +14,7 @@ setup(
     description='wrapper interface to Netapp filers',
     long_description=read('README.rst'),
     author='Christian Assing, Roland Wohlfahrt',
-    author_email='christian.assing@infineon.com, roland.wohlfahrt-ee@infineon.com',
+    author_email='christian.assing@infineon.com, roland.wohlfahrt@infineon.com',
     url='https://github.com/ifxit/nidhogg',
     packages=find_packages(exclude=['tests']),
     install_requires=open("requirements.txt").readlines(),
