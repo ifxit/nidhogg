@@ -1,24 +1,31 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from setuptools import setup, find_packages
 import os
+from setuptools import setup, find_packages
 
 
 def read(fname):
+    """Utility function to read the README file.
+
+    Used for the long_description.  It's nice, because now 1) we have a top level
+    README file and 2) it's easier to type in the README file than to put a raw
+    string in below ...
+    """
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
 
 setup(
     name='nidhogg',
     version='3.4.2',
     description='wrapper interface to Netapp filers',
-    long_description=read('README.rst'),
+    long_description=read("README.rst"),
     author='Christian Assing, Roland Wohlfahrt',
     author_email='christian.assing@infineon.com, roland.wohlfahrt@infineon.com',
     url='https://github.com/ifxit/nidhogg',
-    packages=find_packages(exclude=['tests']),
+    packages=find_packages(),
     install_requires=open("requirements.txt").readlines(),
-    license=read('LICENSE.txt'),
+    license=read("LICENSE.txt"),
     platforms='any',
     keywords='netapp vserver sevenmode ontapi',
     classifiers=[
