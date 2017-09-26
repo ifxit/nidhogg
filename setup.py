@@ -17,7 +17,7 @@ def read(fname):
 
 setup(
     name='nidhogg',
-    version='3.4.5',
+    version='3.5.0',
     description='wrapper interface to Netapp filers',
     long_description=read("README.rst"),
     author='Christian Assing, Roland Wohlfahrt',
@@ -25,9 +25,9 @@ setup(
     url='https://github.com/ifxit/nidhogg',
     packages=["nidhogg"],
     install_requires=open("requirements.txt").readlines(),
-    license=read("LICENSE.txt"),
+    license="MIT License, Copyright (c) 2017 Infineon Technologies AG",
     platforms='any',
-    keywords='netapp vserver sevenmode ontapi',
+    keywords=['netapp', 'vserver', 'sevenmode', 'ontapi'],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
