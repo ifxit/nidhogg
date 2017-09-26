@@ -1,10 +1,11 @@
-include README.rst LICENSE.txt
-exclude .coveragerc
+include README.rst LICENSE.txt AUTHORS.txt
+exclude .coverage*
 exclude requirements-*.txt
 exclude .bumpversion.cfg
 exclude .travis.yml
 exclude pytest.ini
 exclude .gitignore
+exclude MANIFEST.in
 prune tests
 prune doc
 prune xml
