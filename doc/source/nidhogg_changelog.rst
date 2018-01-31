@@ -1,5 +1,12 @@
 CHANGELOG
-===============
+=========
+
+v3.6.0
+------
+
+* Method :py:meth:`~.ClusterMode.update_snapmirror` (ClusterMode) added.
+* Method :py:meth:`~.ClusterMode.update_snapmirror_with_snapshot` (ClusterMode) added.
+* Method :py:meth:`~.ClusterMode.create_snapshot` (ClusterMode) changed. Optional *label* added.
 
 
 v3.5.0

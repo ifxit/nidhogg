@@ -448,24 +448,53 @@ class ClusterMode(Nidhogg):
             policy="default"
         )
 
-    def update_snapmirror(self, destination_volume, destination_qtree=None):
-        """Trigger the snapmirror replication."""
-        if destination_qtree:           # pragma: no cover
-            raise NidhoggException("param destination_qtree not supported in cluster mode")
+    def update_snapmirror(self, volume):
+        """Trigger the snapmirror replication. You have to be connected on the destination server.
+
+        :param volume: name of snapmirror destination volume
+        :type volume: str
+        :raises NidhoggException: if an error occurs
+        """
+        self.snapmirror_update(
+            destination_location="{}:{}".format(self.vserver, volume)
+        )
+
+    def update_snapmirror_with_snapshot(self, name, volume):
+        """Trigger the snapmirror replication. You have to be connected on the destination server.
+
+        :param name: name of the source snapshot
+        :type name: str
+        :param volume: name of snapmirror destination volume
+        :type volume: str
+        :raises NidhoggException: if an error occurs
+        """
+        self.snapmirror_update(
+            destination_location="{}:{}".format(self.vserver, volume),
+            source_snapshot=name
+        )
+
+    def get_snapmirror_status(self, *args, **kwargs):
+        """Not available for cluster mode."""
         raise NotImplementedError()     # pragma: no cover
 
-    def update_snapmirror_with_snapshot(self, name, destination_volume, destination_qtree=None):
-        """Update the named snapshot to the snapmirror destination."""
-        if destination_qtree:           # pragma: no cover
-            raise NidhoggException("param destination_qtree not supported in cluster mode")
+    def get_snapmirror_volume_status(self, *args, **kwargs):
+        """Not available for cluster mode."""
         raise NotImplementedError()     # pragma: no cover
 
-    def get_snapmirror_status(self, volume=None, qtree=None):
-        """Get status the snapmirror replication."""
-        if qtree:                       # pragma: no cover
-            raise NidhoggException("param qtree not supported in cluster mode")
-        raise NotImplementedError()     # pragma: no cover
+    def create_snapshot(self, volume, name, label=None):
+        """Create a snapshot with an optional label.
 
-    def get_snapmirror_volume_status(self, volume):
-        """Get status the snapmirror replication."""
-        raise NotImplementedError()     # pragma: no cover
+        :param volume: name of the volume
+        :type volume: str
+        :param name: name of the snapshot
+        :type name: str
+        :param label: add a snapmirror label to snapshot
+        :type label: str
+        :raises NidhoggException: if an error occurs
+        """
+        opts = dict()
+        if label:
+            opts['snapmirror_label'] = label
+        opts['volume'] = volume
+        opts['snapshot'] = name
+        return self.snapshot_create(**opts)

@@ -75,3 +75,18 @@ def test_update_snapmirror_with_snapshot_sevenmode_api_4(sevenmode):
         'source_snapshot': "name",
         'destination_snapshot': "name"
     })]
+
+
+def test_update_snapmirror_clustermode_api(clustermode):
+    clustermode.update_snapmirror("volume")
+    assert clustermode.sent == [('snapmirror_update', {
+        'destination_location': 'my:volume',
+    })]
+
+
+def test_update_snapmirror_with_snapshot_clustermode_api(clustermode):
+    clustermode.update_snapmirror_with_snapshot("name", "volume")
+    assert clustermode.sent == [('snapmirror_update', {
+        'destination_location': 'my:volume',
+        'source_snapshot': "name",
+    })]

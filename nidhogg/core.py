@@ -222,17 +222,6 @@ class Nidhogg(object):
                 vols.append(vol)
         return vols
 
-    def create_snapshot(self, volume, name):
-        """Create a snapshot.
-
-        :param volume: name of the volume
-        :type volume: str
-        :param name: name of the snapshot
-        :type name: str
-        :raises NidhoggException: if an error occurs
-        """
-        return self.snapshot_create(volume=volume, snapshot=name)
-
     def delete_snapshot(self, volume, name):
         """Delete a snapshot.
 
@@ -522,5 +511,13 @@ class Nidhogg(object):
 
         * Go to :py:meth:`~.SevenMode.get_snapmirror_volume_status` (SevenMode)
         * Go to :py:meth:`~.ClusterMode.get_snapmirror_volume_status` (ClusterMode)
+        """
+        pass    # pragma: no cover
+
+    def create_snapshot(self, *args, **kwargs):
+        """See sub classes.
+
+        * Go to :py:meth:`~.SevenMode.create_snapshot` (SevenMode)
+        * Go to :py:meth:`~.ClusterMode.create_snapshot` (ClusterMode)
         """
         pass    # pragma: no cover

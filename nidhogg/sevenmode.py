@@ -588,3 +588,14 @@ class SevenMode(Nidhogg):
         return self._item_to_snapmirrorvolumestatus(self.snapmirror_get_volume_status(
             volume=volume
         )["netapp"]["results"])
+
+    def create_snapshot(self, volume, name):
+        """Create a snapshot.
+
+        :param volume: name of the volume
+        :type volume: str
+        :param name: name of the snapshot
+        :type name: str
+        :raises NidhoggException: if an error occurs
+        """
+        return self.snapshot_create(volume=volume, snapshot=name)
