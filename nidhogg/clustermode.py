@@ -497,4 +497,4 @@ class ClusterMode(Nidhogg):
             opts['snapmirror_label'] = label
         opts['volume'] = volume
         opts['snapshot'] = name
-        return self.snapshot_create(**opts)
+        self.snapshot_create(**opts)

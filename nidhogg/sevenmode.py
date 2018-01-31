@@ -598,4 +598,4 @@ class SevenMode(Nidhogg):
         :type name: str
         :raises NidhoggException: if an error occurs
         """
-        return self.snapshot_create(volume=volume, snapshot=name)
+        self.snapshot_create(volume=volume, snapshot=name)
