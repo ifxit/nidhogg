@@ -96,12 +96,18 @@ class SnapmirrorStatus(InitDict):
     """Data object representing a snapmirror status."""
 
     required_arguments = [
-        "source_location", "destination_location", "last_transfer_from",
-        "last_transfer_size", "last_transfer_duration", "transfer_progress", "lag_time",
-        "mirror_timestamp", "contents", "status", "state",
-        # optional
-        "base_snapshot", "current_transfer_error", "current_transfer_type",
-        "inodes_replicated", "last_transfer_type", "replication_ops"
+        'source_location', 'destination_location', 'lag_time', 'last_transfer_from',
+        'last_transfer_size', 'last_transfer_duration', 'last_transfer_type', 'status', 'transfer_progress',
+        'mirror_timestamp', 'contents', 'state', 'base_snapshot', 'current_transfer_error', 'current_transfer_type',
+        'inodes_replicated', 'replication_ops', 'break_failed_count', 'break_successful_count',
+        'destination_volume', 'destination_volume_node', 'destination_vserver', 'destination_vserver_uuid',
+        'exported_snapshot', 'exported_snapshot_timestamp', 'is_constituent', 'is_healthy',
+        'last_transfer_end_timestamp', 'last_transfer_network_compression_ratio', 'max_transfer_rate', 'mirror_state',
+        'newest_snapshot', 'newest_snapshot_timestamp', 'opmask', 'policy', 'policy_type',
+        'relationship_control_plane', 'relationship_group_type', 'relationship_id', 'relationship_status',
+        'relationship_type', 'resync_failed_count', 'resync_successful_count', 'source_volume', 'source_vserver',
+        'source_vserver_uuid', 'total_transfer_bytes', 'total_transfer_time_secs', 'update_failed_count',
+        'update_successful_count', 'vserver', 'snapmirror_status',
     ]
 
 

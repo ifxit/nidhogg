@@ -17,7 +17,7 @@ import collections
 import logging
 
 from .http import NidhoggHttp
-from .compatible import QuotaReport, Quota, QTree, VolumeWithQuotaRatio, Volume
+from .compatible import QuotaReport, Quota, QTree, VolumeWithQuotaRatio, Volume, SnapmirrorStatus
 from .utils import underline_to_dash
 
 # used the capture urllib3 wannings
@@ -132,6 +132,68 @@ class Nidhogg(object):
             qtree=item['qtree'],
             status=item['status'],
             security_style=item['security-style'],
+        )
+
+    def _item_to_snapmirrorstatus(self, item):
+        return SnapmirrorStatus(
+            # 7mode and cluster mode
+            source_location=item["source-location"],
+            destination_location=item["destination-location"],
+            lag_time=item["lag-time"],
+            last_transfer_from=item["last-transfer-from"],
+            last_transfer_size=item["last-transfer-size"],
+            last_transfer_duration=item["last-transfer-duration"],
+            last_transfer_type=item['last-transfer-type'] if 'last-transfer-type' in item else None,
+            # sevenmode
+            status=item["status"] if 'status' in item else None,
+            transfer_progress=item["transfer-progress"] if 'transfer-progress' in item else None,
+            mirror_timestamp=item["mirror-timestamp"] if 'mirror-timestamp' in item else None,
+            contents=item["contents"] if 'contents' in item else None,
+            state=item["state"] if 'state' in item else None,
+            # sevenmode optional
+            base_snapshot=item['base-snapshot'] if 'base-snapshot' in item else None,
+            current_transfer_error=item['current-transfer-error'] if 'current-transfer-error' in item else None,
+            current_transfer_type=item['current-transfer-type'] if 'current-transfer-type' in item else None,
+            inodes_replicated=item['inodes-replicated'] if 'inodes-replicated' in item else None,
+            replication_ops=item['replication-ops'] if 'replication-ops' in item else None,
+            # cluster mode
+            break_failed_count=item['break-failed-count'] if 'break-failed-count' in item else None,
+            break_successful_count=item['break-successful-count'] if 'break-successful-count' in item else None,
+            destination_volume=item['destination-volume'] if 'destination-volume' in item else None,
+            destination_volume_node=item['destination-volume-node'] if 'destination-volume-node' in item else None,
+            destination_vserver=item['destination-vserver'] if 'destination-vserver' in item else None,
+            destination_vserver_uuid=item['destination-vserver-uuid'] if 'destination-vserver-uuid' in item else None,
+            exported_snapshot=item['exported-snapshot'] if 'exported-snapshot' in item else None,
+            exported_snapshot_timestamp=item['exported-snapshot-timestamp'] if 'exported-snapshot-timestamp' in item else None,
+            is_constituent=item['is-constituent'] if 'is-constituent' in item else None,
+            is_healthy=item['is-healthy'] if 'is-healthy' in item else None,
+            last_transfer_end_timestamp=item['last-transfer-end-timestamp'] if 'last-transfer-end-timestamp' in item else None,
+            last_transfer_network_compression_ratio=item['last-transfer-network-compression-ratio'] if 'last-transfer-network-compression-ratio' in item else None,
+            max_transfer_rate=item['max-transfer-rate'] if 'max-transfer-rate' in item else None,
+            mirror_state=item['mirror-state'] if 'mirror-state' in item else None,
+            newest_snapshot=item['newest-snapshot'] if 'newest-snapshot' in item else None,
+            newest_snapshot_timestamp=item['newest-snapshot-timestamp'] if 'newest-snapshot-timestamp' in item else None,
+            opmask=item['opmask'] if 'opmask' in item else None,
+            policy=item['policy'] if 'policy' in item else None,
+            policy_type=item['policy-type'] if 'policy-type' in item else None,
+            relationship_control_plane=item['relationship-control-plane'] if 'relationship-control-plane' in item else None,
+            relationship_group_type=item['relationship-group-type'] if 'relationship-group-type' in item else None,
+            relationship_id=item['relationship-id'] if 'relationship-id' in item else None,
+            relationship_status=item['relationship-status'] if 'relationship-status' in item else None,
+            relationship_type=item['relationship-type'] if 'relationship-type' in item else None,
+            resync_failed_count=item['resync-failed-count'] if 'resync-failed-count' in item else None,
+            resync_successful_count=item['resync-successful-count'] if 'resync-successful-count' in item else None,
+            source_volume=item['source-volume'] if 'source-volume' in item else None,
+            source_vserver=item['source-vserver'] if 'source-vserver' in item else None,
+            source_vserver_uuid=item['source-vserver-uuid'] if 'source-vserver-uuid' in item else None,
+            total_transfer_bytes=item['total-transfer-bytes'] if 'total-transfer-bytes' in item else None,
+            total_transfer_time_secs=item['total-transfer-time-secs'] if 'total-transfer-time-secs' in item else None,
+            update_failed_count=item['update-failed-count'] if 'update-failed-count' in item else None,
+            update_successful_count=item['update-successful-count'] if 'update-successful-count' in item else None,
+            vserver=item['vserver'] if 'vserver' in item else None,
+            # helper state
+            # mapping relationship-status (cluster mode) and status (7mode) to snapmirror-status
+            snapmirror_status=item['relationship-status'].lower() if 'relationship-status' in item else item["status"].lower(),
         )
 
     #

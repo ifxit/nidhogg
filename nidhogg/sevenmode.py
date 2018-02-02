@@ -11,7 +11,7 @@ except ImportError:     # pragma: no cover
 from time import sleep
 from .core import Nidhogg, NidhoggException
 import nidhogg.core     # this style needed for patching
-from .compatible import Volume, Snapshot, ACE, SnapmirrorStatus, SnapmirrorVolumeStatus, CifsShare
+from .compatible import Volume, Snapshot, ACE, SnapmirrorVolumeStatus, CifsShare
 from .utils import safe_get
 
 import logging
@@ -57,28 +57,6 @@ class SevenMode(Nidhogg):
             permission=item['access-rights'],
             is_group=False if 'user-name' in item else True,
             user_group_type=None       # not used
-        )
-
-    def _item_to_snapmirrorstatus(self, item):
-        return SnapmirrorStatus(
-            source_location=item["source-location"],
-            destination_location=item["destination-location"],
-            last_transfer_from=item["last-transfer-from"],
-            last_transfer_size=item["last-transfer-size"],
-            last_transfer_duration=item["last-transfer-duration"],
-            transfer_progress=item["transfer-progress"],
-            lag_time=item["lag-time"],
-            mirror_timestamp=item["mirror-timestamp"],
-            contents=item["contents"],
-            status=item["status"],
-            state=item["state"],
-            # optional
-            base_snapshot=item['base-snapshot'] if 'base-snapshot' in item else None,
-            current_transfer_error=item['current-transfer-error'] if 'current-transfer-error' in item else None,
-            current_transfer_type=item['current-transfer-type'] if 'current-transfer-type' in item else None,
-            inodes_replicated=item['inodes-replicated'] if 'inodes-replicated' in item else None,
-            last_transfer_type=item['last-transfer-type'] if 'last-transfer-type' in item else None,
-            replication_ops=item['replication-ops'] if 'replication-ops' in item else None
         )
 
     def _item_to_snapmirrorvolumestatus(self, item):

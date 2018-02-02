@@ -473,9 +473,37 @@ class ClusterMode(Nidhogg):
             source_snapshot=name
         )
 
-    def get_snapmirror_status(self, *args, **kwargs):
-        """Not available for cluster mode."""
-        raise NotImplementedError()     # pragma: no cover
+    def get_snapmirror_status(self, volume=None, max_records=MAX_RECORDS):
+        """Get status of snapmirror replication pairs. You have to be connected on the destination server.
+
+        If no params are provided, return all snapmirror status pairs.
+
+        :param volume: name of destination volume
+        :type volume: str
+        :return: list of all snapmirror pair status
+        :rtype: list of :class:`~nidhogg.compatible.SnapmirrorStatus` or empty list
+        :raises NidhoggException: if an error occurs
+        """
+        opts = dict()
+        if volume:
+            opts['query'] = dict(
+                snapmirror_info=dict(
+                    destination_location="{}:{}".format(self.vserver, volume)
+                )
+            )
+            opts['max_records'] = max_records
+        results = self.snapmirror_get_iter(**opts)["netapp"]["results"]
+        if int(results["num-records"]) > 1:
+            return [
+                self._item_to_snapmirrorstatus(item)
+                for item in results["attributes-list"]["snapmirror-info"]
+            ]
+        elif int(results["num-records"]) == 1:
+            return [
+                self._item_to_snapmirrorstatus(results["attributes-list"]["snapmirror-info"])
+            ]
+        logger.warn("get_snapmirror_status: no entries found")
+        return []
 
     def get_snapmirror_volume_status(self, *args, **kwargs):
         """Not available for cluster mode."""

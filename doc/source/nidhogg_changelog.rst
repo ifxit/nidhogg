@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+v3.6.1
+------
+
+Method :py:meth:`~.ClusterMode.get_snapmirror_status` (ClusterMode) added.
+Method :py:meth:`~.SevenMode.get_snapmirror_status` (SevenMode) changed.
+Returning dict contains now the key *snapmirror_status*. This key returns the current state of the
+snapmirror replication process and can be used for both modes.
+
+
 v3.6.0
 ------
 
