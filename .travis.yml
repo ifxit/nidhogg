@@ -6,18 +6,17 @@ python:
 - '3.6'
 install: pip install -r requirements-test.txt
 script: py.test
-
 jobs:
   include:
-    - stage: pypi deploy
-      deploy:
-        provider: pypi
-        user: rolze
-        # TEST pypi server
-        # server: https://test.pypi.org/legacy/
-        password:
-          secure: duPi+RvmDJyiGHwzQjt9EVqJZUCleyPjc4pYn69dqmA0X4E09dEoqrKHDSJkxEa8KTlkigQk9yx0h7Da6CWXjZBjsdI4UGTGWAvGagn0BkzWjesCXW1dvANSDaokpU8iKxL0qz/Om4uy+GdK/A540uhGD7FMq/XpINSv6CHGYp3eBtY/C+XNlUgV6RXBL7HU6maIASjkZcmNfsYsZm2pAVZ28Sv+jzaBb3aajeZxL6TtaRbUs8YiK7DwL8h9lF8nqsg57D2o0dX2l637qjOKs/lZHsDGhNsTYCTUNnjpzXMl9TyjnYbt7lcWA2ddTMWeNxxn/+F8siuIuti4ibo3fZUouYQz5FO+Db6Wnh38sya2u8uEoe55gpJz/NPbJnq03TNKr/vYVHz8jA2ELChWG2451XQwr6ynbvMYf+mGUgwyC9uajWfIC29OoBeqctRHJ1vVLQ7D3hk4pmd/tAqANF4qCpq0N2BdPH02mwk1vuyxklkbSbohSukpguVdZXER+daAvdSUlOzi+0bWBS8s2mxGpvi66pfp5QWENpQkVMlsEZV52gxQWNa20rx8c49jJD9zdyNXXqHue1N2cEywFBCeIgwlRTHoE528B+7cjwG7Z3TIMSSlnkUqm89WIcVFhJhZX9BIs+q1KerME0Qxb555vrCe1dY0xdQwYWacpLQ=
-        on:
-          # tags: true
-          distributions: "sdist bdist_wheel"
-          repo: ifxit/nidhogg
+  - stage: pypi deploy
+    deploy:
+      provider: pypi
+      # TEST pypi server
+      # server: https://test.pypi.org/legacy/
+      user: rolze
+      password:
+        secure: l6ESRryRjJkz2CbXQHGM5Xe7Dr2E5bC/SL9Gb6ZiloJ+YESTfGWf3SvtuJPkeo9SR/HRgOgg9s0/6kglEHFBXFR1hbBI0KmHAFRPq99lpzTHbAhaf/JGe516y7YkkwfLoubDknfeQ2lKkCQHrfp7C5FSUPACsHHDg/3XgxHqUaYrPo2jLRTbTwpLZGnymVyX/CLWNvA3KPmPC253nAqoeGKmuZ7azcn7WKlSH6ScJoay4vWX7aUtvBSnbkFUFMbG3i7VO7jSsEObXKBOQCMAw2CV5DxrrxzsCMGx7/VtuBkDk5AIdBAiczICJPIhEdD79oEUq86KtiukUrh+aB0liSy01w6cEfqPdlpTFGueJ+yJ1UYu1ph54TbShJ6bvfORIvDV8jRKy4JPh2ZuNJVzBNJ+WLWQU/Wx3brrvWl2GEIrg8jeZEq2QHxNqYEdcnoXhA8YXLElReH7pypN5VYNMF4PXxs9XTpZSVd+VBs8oaNzklpaI7PYoM56mRDe5czNmAHFwNV9Wl3x9Z0NBDH6UaQ2MsB7Ya5+Bte5rvmG0LuAes9tGiIRzXuwtK64GR1IyngeTnaOtZSdF+92EHPsemdw7KhFibtI97vEAqaeJVloFAoyslIFInaP2/p7Xe6T5KFfvWLDuZkqg2jsuuxtC9anPly60Dt+4WxSnXYZc4M=
+      on:
+        # tags: true
+        distributions: sdist bdist_wheel
+        repo: ifxit/nidhogg
