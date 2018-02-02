@@ -17,6 +17,6 @@ jobs:
       password:
         secure: l6ESRryRjJkz2CbXQHGM5Xe7Dr2E5bC/SL9Gb6ZiloJ+YESTfGWf3SvtuJPkeo9SR/HRgOgg9s0/6kglEHFBXFR1hbBI0KmHAFRPq99lpzTHbAhaf/JGe516y7YkkwfLoubDknfeQ2lKkCQHrfp7C5FSUPACsHHDg/3XgxHqUaYrPo2jLRTbTwpLZGnymVyX/CLWNvA3KPmPC253nAqoeGKmuZ7azcn7WKlSH6ScJoay4vWX7aUtvBSnbkFUFMbG3i7VO7jSsEObXKBOQCMAw2CV5DxrrxzsCMGx7/VtuBkDk5AIdBAiczICJPIhEdD79oEUq86KtiukUrh+aB0liSy01w6cEfqPdlpTFGueJ+yJ1UYu1ph54TbShJ6bvfORIvDV8jRKy4JPh2ZuNJVzBNJ+WLWQU/Wx3brrvWl2GEIrg8jeZEq2QHxNqYEdcnoXhA8YXLElReH7pypN5VYNMF4PXxs9XTpZSVd+VBs8oaNzklpaI7PYoM56mRDe5czNmAHFwNV9Wl3x9Z0NBDH6UaQ2MsB7Ya5+Bte5rvmG0LuAes9tGiIRzXuwtK64GR1IyngeTnaOtZSdF+92EHPsemdw7KhFibtI97vEAqaeJVloFAoyslIFInaP2/p7Xe6T5KFfvWLDuZkqg2jsuuxtC9anPly60Dt+4WxSnXYZc4M=
       on:
-        # tags: true
+        tags: true
         distributions: sdist bdist_wheel
         repo: ifxit/nidhogg
