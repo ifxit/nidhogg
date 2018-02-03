@@ -17,7 +17,7 @@ You can install ``nidhogg`` using::
 
     pip install nidhogg
 
-``nidhogg`` requires Python >= 2.7 or Python >= 3.4.
+``nidhogg`` requires Python >= 2.7 or Python <= 3.7.
 
 
 Please help out

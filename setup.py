@@ -25,7 +25,7 @@ setup(
     url='https://github.com/ifxit/nidhogg',
     packages=["nidhogg"],
     install_requires=open("requirements.txt").readlines(),
-    license="MIT License, Copyright (c) 2017 Infineon Technologies AG",
+    license="MIT License, Copyright (c) 2018 Infineon Technologies AG",
     platforms='any',
     keywords=['netapp', 'vserver', 'sevenmode', 'ontapi'],
     classifiers=[
