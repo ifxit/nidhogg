@@ -11,14 +11,14 @@ from nidhogg.clustermode import ClusterMode
     (ClusterMode, {"is-clustered": "true"}),
 ], indirect=True)
 def test_clustered(mode):
-    assert mode.clustered
+    assert mode.clustered is True
 
 
 @pytest.mark.parametrize('mode', [
     (ClusterMode, {"is-clustered": "false"}),
 ], indirect=True)
 def test_clustered_false(mode):
-    assert not mode.clustered
+    assert mode.clustered is False
 
 
 @pytest.mark.parametrize('mode', [

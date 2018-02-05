@@ -31,6 +31,7 @@ def sevenmode(request, monkeypatch):
     monkeypatch.setattr("nidhogg.sevenmode.SevenMode._do", do_mock)
     n = get_sevenmode()
     n.patched_return_value = mock.MagicMock()
+    n.clustered = False
     return n
 
 
@@ -53,6 +54,7 @@ def clustermode(request, monkeypatch):
     monkeypatch.setattr("nidhogg.clustermode.ClusterMode._do", do_mock)
     n = get_clustermode()
     n.patched_return_value = mock.MagicMock()
+    n.clustered = True
     return n
 
 

@@ -242,6 +242,7 @@ def test_get_snapmirror_status_single_entry_sevenmode(mode):
 
 @pytest.mark.parametrize('mode', [
     (ClusterMode, {
+        "is-clustered": "true",
         'attributes-list': {
             'snapmirror-info': cluster_snapmirror_status
         },
@@ -412,6 +413,7 @@ def test_get_snapmirror_status_sevenmode(mode):
 
 @pytest.mark.parametrize('mode', [
     (ClusterMode, {
+        "is-clustered": "true",
         'attributes-list': {
             'snapmirror-info': [
                 cluster_snapmirror_status,

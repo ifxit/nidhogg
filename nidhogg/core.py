@@ -191,9 +191,8 @@ class Nidhogg(object):
             update_failed_count=item['update-failed-count'] if 'update-failed-count' in item else None,
             update_successful_count=item['update-successful-count'] if 'update-successful-count' in item else None,
             vserver=item['vserver'] if 'vserver' in item else None,
-            # helper state
-            # mapping relationship-status (cluster mode) and status (7mode) to snapmirror-status
-            snapmirror_status=item['relationship-status'].lower() if 'relationship-status' in item else item["status"].lower(),
+            # helper state, mapping relationship-status (cluster mode) and status (7mode) to snapmirror-status
+            snapmirror_status=item['relationship-status'].lower() if self.clustered else item["status"].lower(),
         )
 
     #
@@ -223,7 +222,8 @@ class Nidhogg(object):
 
         :rtype: boolean
         """
-        return self.system_get_version()['netapp']['results']['is-clustered'] == "true"
+        results = self.system_get_version()['netapp']['results']
+        return 'is-clustered' in results and results['is-clustered'] == "true"
 
     @cached_property
     def ontapi_version(self):
