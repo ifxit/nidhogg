@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+v3.6.2
+------
+
+Method :py:meth:`~.ClusterMode.list_snapmirror_destinations` (ClusterMode) added.
+
+
 v3.6.1
 ------
 

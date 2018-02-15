@@ -552,7 +552,7 @@ class ClusterMode(Nidhogg):
         :param volume: name of source volume
         :type volume: str
         :return: list of all snapmirror destinations
-        :rtype: list of :class:`~nidhogg.compatible.SnapmirrorDestinationStatus` or empty list    # TODO
+        :rtype: list of :class:`~nidhogg.compatible.SnapmirrorDestinationInfo` or empty list
         :raises NidhoggException: if an error occurs
         """
         opts = dict()
