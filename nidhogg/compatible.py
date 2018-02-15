@@ -125,3 +125,13 @@ class CifsShare(InitDict):
     required_arguments = [
         "path", "share_name"
     ]
+
+
+class SnapmirrorDestinationInfo(InitDict):
+    """Data object representing a snapmirror destination info."""
+
+    required_arguments = [
+        "destination_location", "destination_volume", "destination_vserver", "is_constituent", "policy_type",
+        "relationship_group_type", "relationship_id", "relationship_status", "relationship_type",
+        "source_location", "source_volume", "source_volume_node", "source_vserver"
+    ]

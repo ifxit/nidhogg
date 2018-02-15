@@ -577,3 +577,7 @@ class SevenMode(Nidhogg):
         :raises NidhoggException: if an error occurs
         """
         self.snapshot_create(volume=volume, snapshot=name)
+
+    def list_snapmirror_destinations(self, volume=None, qtree=None):
+        """Not implemented yet for seven mode."""
+        raise NotImplementedError()     # pragma: no cover

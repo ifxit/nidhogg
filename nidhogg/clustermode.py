@@ -11,7 +11,7 @@ except ImportError:     # pragma: no cover
 from time import sleep
 from .core import Nidhogg, NidhoggException
 import nidhogg.core     # this style needed for patching
-from .compatible import Volume, Snapshot, ACE, CifsShare
+from .compatible import Volume, Snapshot, ACE, CifsShare, SnapmirrorDestinationInfo
 
 import logging
 logger = logging.getLogger(__name__)
@@ -56,6 +56,23 @@ class ClusterMode(Nidhogg):
             permission=item['permission'],
             is_group=None,      # not used
             user_group_type=item['user-group-type'] if "user-group-type" in item else None
+        )
+
+    def _item_to_snapmirrordestinationinfo(self, item):
+        return SnapmirrorDestinationInfo(
+            destination_location=item["destination-location"],
+            destination_volume=item['destination-volume'],
+            destination_vserver=item['destination-vserver'],
+            is_constituent=item['is-constituent'],
+            policy_type=item['policy-type'],
+            relationship_group_type=item['relationship-group-type'],
+            relationship_id=item['relationship-id'],
+            relationship_status=item['relationship-status'],
+            relationship_type=item['relationship-type'],
+            source_location=item["source-location"],
+            source_volume=item['source-volume'],
+            source_volume_node=item['source-volume-node'],
+            source_vserver=item['source-vserver']
         )
 
     #
@@ -526,3 +543,35 @@ class ClusterMode(Nidhogg):
         opts['volume'] = volume
         opts['snapshot'] = name
         self.snapshot_create(**opts)
+
+    def list_snapmirror_destinations(self, volume=None, max_records=MAX_RECORDS):
+        """List all snapmirror destinations. You have to be connected on the source server.
+
+        If no params are provided, return all snapmirror destinations.
+
+        :param volume: name of source volume
+        :type volume: str
+        :return: list of all snapmirror destinations
+        :rtype: list of :class:`~nidhogg.compatible.SnapmirrorDestinationStatus` or empty list    # TODO
+        :raises NidhoggException: if an error occurs
+        """
+        opts = dict()
+        if volume:
+            opts['query'] = dict(
+                snapmirror_destination_info=dict(
+                    source_location="{}:{}".format(self.vserver, volume)
+                )
+            )
+            opts['max_records'] = max_records
+        results = self.snapmirror_get_destination_iter(**opts)["netapp"]["results"]
+        if int(results["num-records"]) > 1:
+            return [
+                self._item_to_snapmirrordestinationinfo(item)
+                for item in results["attributes-list"]["snapmirror-destination-info"]
+            ]
+        elif int(results["num-records"]) == 1:
+            return [
+                self._item_to_snapmirrordestinationinfo(results["attributes-list"]["snapmirror-destination-info"])
+            ]
+        logger.warn("list_snapmirror_destinations: no entries found")
+        return []

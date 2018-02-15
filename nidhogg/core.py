@@ -583,3 +583,11 @@ class Nidhogg(object):
         * Go to :py:meth:`~.ClusterMode.create_snapshot` (ClusterMode)
         """
         pass    # pragma: no cover
+
+    def list_snapmirror_destinations(self, *args, **kwargs):
+        """See sub classes.
+
+        * Go to :py:meth:`~.SevenMode.list_snapmirror_destinations` (SevenMode)
+        * Go to :py:meth:`~.ClusterMode.list_snapmirror_destinations` (ClusterMode)
+        """
+        pass    # pragma: no cover
