@@ -60,7 +60,7 @@ Usage
 Planned further work
 ====================
 
-* :strike:`support snapmirror methods for Netapp vserver mode` (done)
+* support snapmirror methods for Netapp vserver mode (done, since v3.6.0)
 * add EMC Isilon wrapper
 
 
