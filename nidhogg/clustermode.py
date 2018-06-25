@@ -8,10 +8,11 @@ except ImportError:     # pragma: no cover
     # py3
     from functools import lru_cache
 
-from time import sleep
-from .core import Nidhogg, NidhoggException
 import nidhogg.core     # this style needed for patching
-from .compatible import Volume, Snapshot, ACE, CifsShare, SnapmirrorDestinationInfo
+
+from .compatible import ACE, CifsShare, SnapmirrorDestinationInfo, Snapshot, Volume
+from .core import Nidhogg, NidhoggException
+from time import sleep
 
 import logging
 logger = logging.getLogger(__name__)
@@ -272,7 +273,7 @@ class ClusterMode(Nidhogg):
         logger.warning("list_cifs_shares: cifs shares found")
         return []
 
-    def create_cifs_share(self, volume, qtree, share_name, group_name=None, comment=None, umask="007"):
+    def create_cifs_share(self, volume, qtree, share_name, group_name=None, comment=None, umask="007", vscan_fileop_profile="standard"):
         """Create a cifs share.
 
         :param volume: name of the volume
@@ -287,13 +288,16 @@ class ClusterMode(Nidhogg):
         :type comment: str
         :param umask: file permission umask
         :type umask: str
+        :param vscan_fileop_profile: vscan-fileop-profile virus scan option (no_scan, standard, strict, writes_only)
+        :type vscan_fileop_profile: str
         :raises NidhoggException: if an error occurs
         """
         opts = dict(
             dir_umask=umask,
             file_umask=umask,
             path="/vol/{0}/{1}".format(volume, qtree),
-            share_name=share_name
+            share_name=share_name,
+            vscan_fileop_profile=vscan_fileop_profile
         )
         if group_name and self.has_forcegroup:
             opts['force_group_for_create'] = group_name
