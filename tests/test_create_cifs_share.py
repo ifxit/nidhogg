@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 
 import pytest
 
-from nidhogg.core import NidhoggException
 from nidhogg.clustermode import ClusterMode
+from nidhogg.core import NidhoggException
 
 
 def test_create_cifs_share_sevenmode_api(sevenmode):
@@ -20,11 +20,11 @@ def test_create_cifs_share_sevenmode_api(sevenmode):
     })
 ], indirect=True)
 def test_create_cifs_share_clustermode_api(mode):
-    mode.create_cifs_share(volume="vol1", qtree="asdf", share_name="asdf", group_name="ccplatg", comment="comment")
+    mode.create_cifs_share(volume="vol1", qtree="asdf", share_name="asdf", group_name="ccplatg", comment="comment", vscan_fileop_profile='foobar')
     assert mode.sent == [
         ('system_get_version', {}),
         ('system_get_ontapi_version', {}),
-        ('cifs_share_create', {'dir_umask': u'007', 'path': u'/vol/vol1/asdf', 'file_umask': u'007', 'share_name': u'asdf', 'comment': "comment", 'force_group_for_create': "ccplatg"}),
+        ('cifs_share_create', {'dir_umask': u'007', 'path': u'/vol/vol1/asdf', 'file_umask': u'007', 'share_name': u'asdf', 'comment': "comment", 'force_group_for_create': "ccplatg", 'vscan_fileop_profile': 'foobar'}),
     ]
 
 
@@ -40,7 +40,7 @@ def test_create_cifs_share_clustermode_no_force_group_api(mode):
     assert mode.sent == [
         ('system_get_version', {}),
         ('system_get_ontapi_version', {}),
-        ('cifs_share_create', {'dir_umask': u'007', 'path': u'/vol/vol1/asdf', 'file_umask': u'007', 'share_name': u'asdf', 'comment': "comment"}),
+        ('cifs_share_create', {'dir_umask': u'007', 'path': u'/vol/vol1/asdf', 'file_umask': u'007', 'share_name': u'asdf', 'comment': "comment", 'vscan_fileop_profile': 'standard'}),
     ]
 
 

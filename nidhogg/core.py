@@ -15,6 +15,9 @@ import xml
 import dicttoxml
 import collections
 import logging
+from abc import ABCMeta, abstractmethod
+# Python 2 and 3
+from six import with_metaclass
 
 from .http import NidhoggHttp
 from .compatible import QuotaReport, Quota, QTree, VolumeWithQuotaRatio, Volume, SnapmirrorStatus
@@ -43,7 +46,7 @@ class NidhoggException(Exception):
     pass
 
 
-class Nidhogg(object):
+class Nidhogg(with_metaclass(ABCMeta)):
     """This is the base class for connecting to a NETAPP filer.
 
     It provides functions that have 7-mode filers and cluster-mode filers in common.
@@ -432,6 +435,7 @@ class Nidhogg(object):
     #
     # API FUNCTIONS implemented in subclasses
     #
+    @abstractmethod
     def list_qtrees(self, *args, **kwargs):
         """See sub classes.
 
@@ -440,6 +444,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def list_volumes(self, *args, **kwargs):
         """See sub classes.
 
@@ -448,6 +453,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def volume_info(self, *args, **kwargs):
         """See sub classes.
 
@@ -456,6 +462,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def list_snapshots(self, *args, **kwargs):
         """See sub classes.
 
@@ -464,6 +471,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def get_quota(self, *args, **kwargs):
         """See sub classes.
 
@@ -472,6 +480,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def list_quotas(self, *args, **kwargs):
         """See sub classes.
 
@@ -480,6 +489,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def list_cifs_shares(self, *args, **kwargs):
         """See sub classes.
 
@@ -488,6 +498,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def create_cifs_share(self, *args, **kwargs):
         """See sub classes.
 
@@ -496,6 +507,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def set_cifs_acl(self, *args, **kwargs):
         """See sub classes.
 
@@ -504,6 +516,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def list_cifs_acls(self, *args, **kwargs):
         """See sub classes.
 
@@ -512,6 +525,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def delete_cifs_acl(self, *args, **kwargs):
         """See sub classes.
 
@@ -520,6 +534,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def delete_cifs_acls(self, *args, **kwargs):
         """See sub classes.
 
@@ -528,6 +543,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def set_quota(self, *args, **kwargs):
         """See sub classes.
 
@@ -536,6 +552,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def delete_quota(self, *args, **kwargs):
         """See sub classes.
 
@@ -544,6 +561,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def update_snapmirror(self, *args, **kwargs):
         """See sub classes.
 
@@ -552,6 +570,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def update_snapmirror_with_snapshot(self, *args, **kwargs):
         """See sub classes.
 
@@ -560,6 +579,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def get_snapmirror_status(self, *args, **kwargs):
         """See sub classes.
 
@@ -568,6 +588,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def get_snapmirror_volume_status(self, *args, **kwargs):
         """See sub classes.
 
@@ -576,6 +597,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def create_snapshot(self, *args, **kwargs):
         """See sub classes.
 
@@ -584,6 +606,7 @@ class Nidhogg(object):
         """
         pass    # pragma: no cover
 
+    @abstractmethod
     def list_snapmirror_destinations(self, *args, **kwargs):
         """See sub classes.
 

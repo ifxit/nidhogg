@@ -5,7 +5,8 @@ from mock import MagicMock
 import pytest
 
 import xml
-from nidhogg.core import Nidhogg, NidhoggException
+from nidhogg.core import NidhoggException
+from nidhogg.sevenmode import SevenMode
 
 
 @pytest.fixture
@@ -14,7 +15,8 @@ def nidhogg(request, monkeypatch, std_netapp_reply):
         return "req"
     monkeypatch.setattr("nidhogg.core.Nidhogg._create_request", create_request_mock)
     mock_http = MagicMock()
-    nidhogg = Nidhogg("url", "user", "password", 1, 1, False, mock_http)
+    # use a subclass here, base class cannot be instantiated
+    nidhogg = SevenMode("url", "user", "password", 1, 1, False, mock_http)
     nidhogg.http.invoke_request.return_value = "reply"
     nidhogg.http.parse_xml_reply.return_value = std_netapp_reply
     return nidhogg
