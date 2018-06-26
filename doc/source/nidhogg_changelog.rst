@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-v3.6.3
+v3.7.0
 ------
 
 Parameter *vscan_fileop_profile*  added to :py:func:`nidhogg.create_cifs_share`. Default is "standard"
