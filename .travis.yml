@@ -12,13 +12,13 @@ jobs:
     deploy:
       provider: pypi
       # TEST pypi server
-      server: https://test.pypi.org/legacy/
+      # server: https://test.pypi.org/legacy/
       user: rolze
       password:
         secure: "YKFmRZq9G2a6QgCqNiwNbladIFW69CK4oVrh2Gs34UYIAg/P8e9RsZVPGxNHxRoMCBUOYgfb+iid3oqcCuhPindWGSdL3Xk3Zq36y3G+om86ZU6T4m8xjP8P52DmXGCduYWK5CPPw8TGTPLlKPhNwqzrf21VAhHdu5ATO7AqkZFgCS9rNq6PwRQrJ3Fn9dmxOlL/Pp9Lz902kFU6FQKcm9E4au91dpvoKaoEkXd5nGv7NyCFgD6teaFf3w0fWpyVme1ouTbyCKGKPBre1BsAygq+2rCj8xsTO5qvWVjAADgb30bQbfPfi14JdbtWdTAdKxJqBsBonL2lIfTpQbLYifglr1lgELZPBEvXhZbh1wwHvt6hmGV6kPMZknkxeNIxbn3wyZlP0X9+3EsPHlmKj1jhyoiUgFEU+eWL3gUVuSC5//R8juhwCWKr1CkB55F/A09VAnGUl22lyFWL8djYPukPKuOVAgWBvc1blx2Au+PacO2QZpUbduSqS2DvP5kWg1YiDwTWgTjVIydAzostG1gtnpEMrQ6870vsmiOCzohjBDNwz9oJl4G8z2I/ZFA6nSwLH4B1w4zqjCsaCWcBNBTx3xi2WSDcU7mQAtYOr7TACDDAVU8MBTb+g55RXHu/6HGx7cjoQCwDCMb/ntsvTzOCndxNrDF3Zw/pEbt7iWo="
       on:
-        # tags: true
+        tags: true
         # branch: master
-        all_branches: true
+        # all_branches: true
         distributions: sdist bdist_wheel
         repo: ifxit/nidhogg
