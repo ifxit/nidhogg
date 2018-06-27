@@ -1,6 +1,6 @@
 -r requirements-test.txt
 
 gitflow
-sphinx
+sphinx==1.6.4
 sphinx_rtd_theme
 bumpversion
