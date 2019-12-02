@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
+from time import sleep
+
+import nidhogg.core  # this style needed for patching
+
+from .compatible import ACE, CifsShare, SnapmirrorDestinationInfo, Snapshot, Volume
+from .core import Nidhogg, NidhoggException
+
 try:
     # py2
     from backports.functools_lru_cache import lru_cache
@@ -8,13 +16,8 @@ except ImportError:     # pragma: no cover
     # py3
     from functools import lru_cache
 
-import nidhogg.core     # this style needed for patching
 
-from .compatible import ACE, CifsShare, SnapmirrorDestinationInfo, Snapshot, Volume
-from .core import Nidhogg, NidhoggException
-from time import sleep
 
-import logging
 logger = logging.getLogger(__name__)
 
 
