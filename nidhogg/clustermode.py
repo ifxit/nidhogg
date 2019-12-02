@@ -276,7 +276,7 @@ class ClusterMode(Nidhogg):
         logger.warning("list_cifs_shares: cifs shares found")
         return []
 
-    def create_cifs_share(self, volume, qtree, share_name, group_name=None, comment=None, umask="007", vscan_fileop_profile="standard"):
+    def create_cifs_share(self, volume, qtree, share_name, group_name=None, comment=None, umask="007", vscan_fileop_profile="standard", share_properties=None):
         """Create a cifs share.
 
         :param volume: name of the volume
@@ -293,6 +293,8 @@ class ClusterMode(Nidhogg):
         :type umask: str
         :param vscan_fileop_profile: vscan-fileop-profile virus scan option (no_scan, standard, strict, writes_only)
         :type vscan_fileop_profile: str
+        :param share_properties: list of share properties to set
+        :type share_properties: list of strings
         :raises NidhoggException: if an error occurs
         """
         opts = dict(
@@ -306,6 +308,8 @@ class ClusterMode(Nidhogg):
             opts['force_group_for_create'] = group_name
         if comment:
             opts['comment'] = comment
+        if share_properties:
+            opts['share_properties'] = share_properties
         self.cifs_share_create(**opts)
 
     def set_cifs_acl(self, share_name, user="everyone", right=ACL_READ, set_group_rights=None):
