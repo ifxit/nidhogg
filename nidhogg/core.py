@@ -1,6 +1,20 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import collections
+import logging
+import xml
+from abc import ABCMeta, abstractmethod
+
+import dicttoxml
+from cached_property import cached_property
+# Python 2 and 3
+from six import with_metaclass
+
+from .compatible import QTree, Quota, QuotaReport, SnapmirrorStatus, Volume, VolumeWithQuotaRatio
+from .http import NidhoggHttp
+from .utils import underline_to_dash
+
 try:
     # py2
     from urlparse import urlparse
@@ -10,18 +24,7 @@ except ImportError:     # pragma: no cover
     from urllib.parse import urlparse
     from functools import lru_cache
 
-from cached_property import cached_property
-import xml
-import dicttoxml
-import collections
-import logging
-from abc import ABCMeta, abstractmethod
-# Python 2 and 3
-from six import with_metaclass
 
-from .http import NidhoggHttp
-from .compatible import QuotaReport, Quota, QTree, VolumeWithQuotaRatio, Volume, SnapmirrorStatus
-from .utils import underline_to_dash
 
 # used the capture urllib3 wannings
 logging.captureWarnings(True)
@@ -95,8 +98,14 @@ class Nidhogg(with_metaclass(ABCMeta)):
             raise NidhoggException(self.xmldict["netapp"]["results"]['@reason'] + " (host: {})".format(self.vserver))
         return self.xmldict
 
+    def _item_func(self, key):
+        """dicttoxml list item function."""
+        if key == "share-properties":
+            return "cifs-share-properties"
+        return "item"
+
     def _create_request(self, **kwargs):
-        xml_request = dicttoxml.dicttoxml(collections.OrderedDict(**kwargs), root=False, attr_type=False)
+        xml_request = dicttoxml.dicttoxml(collections.OrderedDict(**kwargs), root=False, attr_type=False, item_func=self._item_func)
         return """
             <?xml version='1.0' encoding='utf-8'?>
             <netapp version='{0.major}.{0.minor}'

@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
+from time import sleep
+
+import nidhogg.core  # this style needed for patching
+
+from .compatible import ACE, CifsShare, SnapmirrorDestinationInfo, Snapshot, Volume
+from .core import Nidhogg, NidhoggException
+
 try:
     # py2
     from backports.functools_lru_cache import lru_cache
@@ -8,13 +16,8 @@ except ImportError:     # pragma: no cover
     # py3
     from functools import lru_cache
 
-import nidhogg.core     # this style needed for patching
 
-from .compatible import ACE, CifsShare, SnapmirrorDestinationInfo, Snapshot, Volume
-from .core import Nidhogg, NidhoggException
-from time import sleep
 
-import logging
 logger = logging.getLogger(__name__)
 
 
@@ -108,7 +111,7 @@ class ClusterMode(Nidhogg):
             return [
                 self._item_to_qtree(results["attributes-list"]["qtree-info"])
             ]
-        logger.warn("list_qtrees: no entries found")
+        logger.warning("list_qtrees: no entries found")
         return []
 
     @lru_cache(maxsize=100)
@@ -134,7 +137,7 @@ class ClusterMode(Nidhogg):
             return [
                 self._item_to_volume(results["attributes-list"]["volume-attributes"])
             ]
-        logger.warn("list_volumes: no entries found")
+        logger.warning("list_volumes: no entries found")
         return []
 
     @lru_cache(maxsize=100)
@@ -186,7 +189,7 @@ class ClusterMode(Nidhogg):
             return [
                 Snapshot(name=results["attributes-list"]["snapshot-info"]['name'])
             ]
-        logger.warn("list_snapshots: no entries found")
+        logger.warning("list_snapshots: no entries found")
         return []
 
     def get_quota(self, volume, qtree, max_records=MAX_RECORDS):
@@ -213,7 +216,7 @@ class ClusterMode(Nidhogg):
         results = self.quota_list_entries_iter(**opts)["netapp"]["results"]
         if int(results["num-records"]) == 1:
             return self._item_to_quota(results['attributes-list']['quota-entry'])
-        logger.warn("get_quota: no entries found")
+        logger.warning("get_quota: no entries found")
         return {}
 
     def list_quotas(self, volume, max_records=MAX_RECORDS):
@@ -245,7 +248,7 @@ class ClusterMode(Nidhogg):
             return [
                 self._item_to_quota_report(results['attributes-list']['quota'])
             ]
-        logger.warn("list_quotas: no entries found")
+        logger.warning("list_quotas: no entries found")
         return []
 
     def list_cifs_shares(self):
@@ -273,7 +276,7 @@ class ClusterMode(Nidhogg):
         logger.warning("list_cifs_shares: cifs shares found")
         return []
 
-    def create_cifs_share(self, volume, qtree, share_name, group_name=None, comment=None, umask="007", vscan_fileop_profile="standard"):
+    def create_cifs_share(self, volume, qtree, share_name, group_name=None, comment=None, umask="007", vscan_fileop_profile="standard", share_properties=None):
         """Create a cifs share.
 
         :param volume: name of the volume
@@ -290,6 +293,8 @@ class ClusterMode(Nidhogg):
         :type umask: str
         :param vscan_fileop_profile: vscan-fileop-profile virus scan option (no_scan, standard, strict, writes_only)
         :type vscan_fileop_profile: str
+        :param share_properties: list of share properties to set
+        :type share_properties: list of strings
         :raises NidhoggException: if an error occurs
         """
         opts = dict(
@@ -303,6 +308,8 @@ class ClusterMode(Nidhogg):
             opts['force_group_for_create'] = group_name
         if comment:
             opts['comment'] = comment
+        if share_properties:
+            opts['share_properties'] = share_properties
         self.cifs_share_create(**opts)
 
     def set_cifs_acl(self, share_name, user="everyone", right=ACL_READ, set_group_rights=None):
@@ -523,7 +530,7 @@ class ClusterMode(Nidhogg):
             return [
                 self._item_to_snapmirrorstatus(results["attributes-list"]["snapmirror-info"])
             ]
-        logger.warn("get_snapmirror_status: no entries found")
+        logger.warning("get_snapmirror_status: no entries found")
         return []
 
     def get_snapmirror_volume_status(self, *args, **kwargs):
@@ -577,5 +584,5 @@ class ClusterMode(Nidhogg):
             return [
                 self._item_to_snapmirrordestinationinfo(results["attributes-list"]["snapmirror-destination-info"])
             ]
-        logger.warn("list_snapmirror_destinations: no entries found")
+        logger.warning("list_snapmirror_destinations: no entries found")
         return []
