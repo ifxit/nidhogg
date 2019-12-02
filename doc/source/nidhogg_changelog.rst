@@ -1,10 +1,17 @@
 CHANGELOG
 =========
 
-v3.7.2
+v3.9.0
 ------
 
-work in progress...
+Parameter *share_properties* added to :py:meth:`~.ClusterMode.create_cifs_share` (ClusterMode).
+Default is None.
+
+
+v3.8.0
+------
+
+Update requests library.
 
 
 v3.7.1
