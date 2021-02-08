@@ -1,3 +1,5 @@
+**Discontinued! Please use NETAPP RESTAPI (http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-rest-api/home.html) instead!**
+
 =======
 nidhogg
 =======
